@@ -6,6 +6,10 @@
  --text-primary-color: white;
 }
 
+/*
+TODO: deixar responsivo e com media queries.
+*/
+
 .site-header {
     background-color: var(--primary-color);
     color: var(--text-primary-color);
@@ -17,6 +21,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.site-logo {
+    height: 40px;  
+    width: auto;
+    margin-right: 10px;
+    vertical-align: middle;
 }
 
 .menu-reference {

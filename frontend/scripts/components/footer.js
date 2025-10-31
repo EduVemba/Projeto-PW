@@ -1,0 +1,6 @@
+export function createFooter() {
+    const footer = document.createElement('footer');
+    //TODO: Adicionar conteudo no rodapé (links, informações de contato, etc.)
+    footer.className = 'site-footer';
+    return footer;
+}

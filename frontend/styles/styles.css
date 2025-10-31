@@ -1,0 +1,31 @@
+:root {
+ /*
+ TODO: Definir variáveis de cores, fontes e espaçamentos globais
+ */ 
+ --primary-color: #4CAF50;
+ --text-primary-color: white;
+}
+
+.site-header {
+    /* Valores não devem usar aspas em CSS */
+    background-color: var(--primary-color);
+    color: var(--text-primary-color);
+    padding: 20px;
+    text-align: center;
+    font-size: 24px;
+    border-radius: 10px 20px 10px 20px;
+    height: 10%;
+}
+
+.site-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 10%;
+    background-color: var(--primary-color);
+    color: var(--text-primary-color);
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+}

@@ -17,7 +17,7 @@ export function createHeader() {
     
     header.className = 'site-header';
     header.appendChild(title);
-    header.appendChild(createMenuButton('Generos', '#'));
+    header.appendChild(createMenuButton('Géneros', '#'));
     header.appendChild(createMenuButton('Tipos', '#tipos'));
     header.appendChild(createMenuButton('Luminosidades', '#orchids'));
     header.appendChild(createMenuButton('Temperaturas', '#contact'));

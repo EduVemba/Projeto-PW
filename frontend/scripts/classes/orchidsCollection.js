@@ -1,3 +1,5 @@
+import { Orchid } from './classes/orchid.js';
+
 //TODO: Todo tipo de orquideas criados devem ser armazenados aqui
 /**
  * @class OrchidsCollection

@@ -1,7 +1,4 @@
 :root {
- /*
- TODO: Definir variáveis de cores, fontes e espaçamentos globais
- */ 
  --primary-color: #4CAF50;
  --text-primary-color: white;
 }
@@ -53,7 +50,7 @@ TODO: deixar responsivo e com media queries.
     bottom: 1%;
     left: 1%;
     right: 1%;
-    height: 10%;
+    height: 5%;
     background-color: var(--primary-color);
     color: var(--text-primary-color);
     padding: 10px;

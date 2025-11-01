@@ -44,3 +44,5 @@ class Orchids {
         this.#image_src = image_src;
     }
 }
+
+export { Orchids };

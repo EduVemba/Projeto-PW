@@ -20,6 +20,15 @@ TODO: deixar responsivo e com media queries.
     align-items: center;
 }
 
+.main-header {
+    background-color: var(--primary-color);
+    color: var(--text-primary-color);
+    text-align: center;
+    font-size: 22px;
+    border-radius: 10px 20px 10px 20px;
+    height: 10%;
+}
+
 .site-logo {
     height: 40px;  
     width: auto;

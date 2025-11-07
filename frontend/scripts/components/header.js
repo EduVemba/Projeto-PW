@@ -1,3 +1,5 @@
+"use strict";
+
 import { createMenuButton } from './menu.js';
 
 export function createHeader() {
@@ -17,12 +19,13 @@ export function createHeader() {
     
     header.className = 'site-header';
     header.appendChild(title);
-    header.appendChild(createMenuButton('Géneros', '#'));
+    header.appendChild(createMenuButton('Géneros', '#orchids'));
     header.appendChild(createMenuButton('Tipos', '#tipos'));
-    header.appendChild(createMenuButton('Luminosidades', '#orchids'));
-    header.appendChild(createMenuButton('Temperaturas', '#contact'));
-    header.appendChild(createMenuButton('Humidades', '#contact'));
-    header.appendChild(createMenuButton('Tamanhos', '#contact'));
-    header.appendChild(createMenuButton('Todas', '#contact'));
+    header.appendChild(createMenuButton('Luminosidades', '#luminosidades'));
+    header.appendChild(createMenuButton('Temperaturas', '#temperaturas'));
+    header.appendChild(createMenuButton('Humidades', '#humidades'));
+    header.appendChild(createMenuButton('Tamanhos', '#tamanhos'));
+    header.appendChild(createMenuButton('Todas', '#todas'));
+
     return header;
 }

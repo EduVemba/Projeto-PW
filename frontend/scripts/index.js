@@ -1,7 +1,7 @@
 //TODO: ficheiro principal que vai gerenciar a aplicação
 import { createHeader } from './components/header.js';
 import { createFooter } from './components/footer.js';
-import { createMain } from './components/body.js';
+import { createMain, updateMainContent } from './components/body.js';
 
 
 const body = document.body;
@@ -13,3 +13,5 @@ const footer = createFooter();
 body.appendChild(header);
 body.appendChild(main);
 body.appendChild(footer);
+
+updateMainContent();

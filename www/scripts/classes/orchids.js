@@ -1,5 +1,5 @@
 "use strict";
-class Orchids {
+export class Orchids {
     #id;
     #description;
     #genus;
@@ -43,6 +43,32 @@ class Orchids {
         this.#size = size;
         this.#image_src = image_src;
     }
+
+    getId(){return this.#id;}
+    getDescription(){return this.#description;}
+    getGenus(){return this.#genus;}
+    getType(){return this.#type;}
+    getLuminosity(){return this.#luminosity;}
+    getTemperature(){return this.#temperature;}
+    getHumidity(){return this.#humidity;}
+    getSize(){return this.#size;}
+    getImagemSrc(){return this.#image_src;}
+
+    toCardElement(){
+        const card = document.createElement("div");
+        card.className = "orchid-card";
+
+        const img = document.createElement("img");
+        img.src = this.#image_src;
+        img.alt = this.#description;
+
+        const name = document.createElement("h3");
+        name.textContent = this.#description;
+
+        card.append(img,name);
+        return card;
+    }
+
 }
 
 export { Orchids };

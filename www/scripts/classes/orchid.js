@@ -1,5 +1,5 @@
 "use strict";
-export class Orchids {
+export class Orchid {
     #id;
     #description;
     #genus;
@@ -52,7 +52,40 @@ export class Orchids {
     getTemperature(){return this.#temperature;}
     getHumidity(){return this.#humidity;}
     getSize(){return this.#size;}
-    getImagemSrc(){return this.#image_src;}
+    getImageSrc(){return this.#image_src;}
+
+     setDescription(value) {
+        if (typeof value !== "string") throw new TypeError("description deve ser string");
+        this.#description = value;
+    }
+    setGenus(value) {
+        if (typeof value !== "number") throw new TypeError("genus deve ser número");
+        this.#genus = value;
+    }
+    setType(value) {
+        if (typeof value !== "number") throw new TypeError("type deve ser número");
+        this.#type = value;
+    }
+    setLuminosity(value) {
+        if (typeof value !== "number") throw new TypeError("luminosity deve ser número");
+        this.#luminosity = value;
+    }
+    setTemperature(value) {
+        if (typeof value !== "number") throw new TypeError("temperature deve ser número");
+        this.#temperature = value;
+    }
+    setHumidity(value) {
+        if (typeof value !== "number") throw new TypeError("humidity deve ser número");
+        this.#humidity = value;
+    }
+    setSize(value) {
+        if (typeof value !== "number") throw new TypeError("size deve ser número");
+        this.#size = value;
+    }
+    setImageSrc(value) {
+        if (typeof value !== "string") throw new TypeError("image_src deve ser string");
+        this.#image_src = value;
+    }
 
     toCardElement(){
         const card = document.createElement("div");
@@ -71,4 +104,3 @@ export class Orchids {
 
 }
 
-export { Orchids };

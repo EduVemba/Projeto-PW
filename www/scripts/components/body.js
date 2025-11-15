@@ -2,6 +2,8 @@
 // O body será onde ficará o conteúdo principal da aplicação.
 // Agora exportamos funções para criar e atualizar o main, evitando efeitos colaterais
 // que executam durante a importação do módulo.
+import { createCard } from "./card.js";
+
 
 const getCurrentWindowLocation = () => window.location.hash;
 
@@ -40,13 +42,28 @@ const mainHeader = () => {
     return head;
 }
 
+const createCardExample = () => {
+    return createCard("Exemplo");
+}
+
+
 export function createMain() {
     const mainEl = document.createElement('main');
+    mainEl.classList.add('main');
+
+    //header
     const header = mainHeader();
     mainEl.appendChild(header);
+    
+    //main-content
+    const mainContent = document.createElement('div');
+    mainContent.classList.add('main-content');
+    mainEl.appendChild(mainContent);
+
     return mainEl;
 }
 
+//TODO:refazer o updadeMainContent pois não pode tirar o main-content.
 // Atualiza o conteúdo do <main> existente (substitui header e conteúdo)
 export function updateMainContent() {
     const newHeader = mainHeader();
@@ -54,29 +71,40 @@ export function updateMainContent() {
     if (oldHeader) oldHeader.replaceWith(newHeader);
 
     const mainContent = document.querySelector('.main-content');
-    if (mainContent) mainContent.remove();
-
-    const newContent = document.createElement('div');
-    newContent.classList.add('main-content');
 
     const hash = getCurrentWindowLocation();
     switch (hash) {
         case '#tipos':
-            newContent.textContent = 'Conteúdo sobre Tipos de Orquídeas';
+            mainContent.textContent = 'Conteúdo sobre Tipos de Orquídeas';
             break;
         case '#orchids':
-            newContent.textContent = 'Conteúdo sobre Géneros de Orquídeas';
+            mainContent.textContent = 'Conteúdo sobre Géneros de Orquídeas';
             break;
         case '#luminosidades':
-            newContent.textContent = 'Conteúdo sobre Luminosidades ideais';
+            mainContent.textContent = 'Conteúdo sobre Luminosidades ideais';
             break;
+        case '#todas':
+            mainContent.textContent = void 0;
+            const card = createCardExample();
+            const card2 = createCardExample();
+            const card3 = createCardExample();
+            const card4 = createCardExample();
+            const card5 = createCardExample();
+
+            mainContent.appendChild(card);
+            mainContent.appendChild(card2);
+            mainContent.appendChild(card3);
+            mainContent.appendChild(card4);
+            mainContent.appendChild(card5);
+        break;
+
         default:
-            newContent.textContent = 'Todas as orquídeas e informações gerais.';
+            mainContent.textContent = 'Todas as orquídeas e informações gerais.';
             break;
     }
 
     const mainEl = document.querySelector('main');
-    if (mainEl) mainEl.appendChild(newContent);
+    if (mainEl) mainEl.appendChild(mainContent);
 }
 
 window.addEventListener('hashchange', updateMainContent);

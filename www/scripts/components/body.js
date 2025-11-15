@@ -19,8 +19,8 @@ const mainHeader = () => {
         case '#tipos':
             text.textContent = 'Tipos';
             break;
-        case '#orchids':
-            text.textContent = 'Orquídeas';
+        case '#todas':
+            text.textContent = 'Todas';
             break;
         case '#luminosidades':
             text.textContent = 'Luminosidades';
@@ -35,16 +35,13 @@ const mainHeader = () => {
             text.textContent = 'Tamanhos';
             break;
         default:
-            text.textContent = 'Todas';
+            text.textContent = 'Orquídeas';
     }
 
     head.appendChild(text);
     return head;
 }
 
-const createCardExample = () => {
-    return createCard("Exemplo");
-}
 
 
 export function createMain() {
@@ -63,44 +60,76 @@ export function createMain() {
     return mainEl;
 }
 
-//TODO:refazer o updadeMainContent pois não pode tirar o main-content.
-// Atualiza o conteúdo do <main> existente (substitui header e conteúdo)
 export function updateMainContent() {
     const newHeader = mainHeader();
     const oldHeader = document.querySelector('.main-header');
     if (oldHeader) oldHeader.replaceWith(newHeader);
 
     const mainContent = document.querySelector('.main-content');
-
     const hash = getCurrentWindowLocation();
-    switch (hash) {
-        case '#tipos':
-            mainContent.textContent = 'Conteúdo sobre Tipos de Orquídeas';
-            break;
-        case '#orchids':
-            mainContent.textContent = 'Conteúdo sobre Géneros de Orquídeas';
-            break;
-        case '#luminosidades':
-            mainContent.textContent = 'Conteúdo sobre Luminosidades ideais';
-            break;
-        case '#todas':
-            mainContent.textContent = void 0;
-            const card = createCardExample();
-            const card2 = createCardExample();
-            const card3 = createCardExample();
-            const card4 = createCardExample();
-            const card5 = createCardExample();
 
-            mainContent.appendChild(card);
-            mainContent.appendChild(card2);
-            mainContent.appendChild(card3);
-            mainContent.appendChild(card4);
-            mainContent.appendChild(card5);
-        break;
+    const routes = {
+        "#tipos": () => [
+            createCard("characteristics", "type-hybrid"),
+            createCard("characteristics", "type-species")
+        ],
 
-        default:
-            mainContent.textContent = 'Todas as orquídeas e informações gerais.';
-            break;
+        "#orchids": () => [
+            createCard("icons","bulbophyllum"),
+            createCard("icons","cattleya"),
+            createCard("icons","cymbidium"),
+            createCard("icons","paphiopedilum"),
+            createCard("icons","phalaenopsis")
+        ],
+
+        "#luminosidades": () => [
+            createCard("characteristics", "luminosity-full-shade"),
+            createCard("characteristics", "luminosity-shaded-light"),
+            createCard("characteristics", "luminosity-filtered-light"),
+            createCard("characteristics", "luminosity-strong-light")
+        ],
+
+        "#todas": () => "TODO",
+
+        "#tamanhos": () => [
+            createCard("characteristics", "size-miniature"),
+            createCard("characteristics", "size-small"),
+            createCard("characteristics", "size-medium"),
+            createCard("characteristics", "size-big")
+        ],
+
+        "#humidades": () => [
+            createCard("characteristics", "humidity-lt40"),
+            createCard("characteristics", "humidity-40-60"),
+            createCard("characteristics", "humidity-60-80"),
+            createCard("characteristics", "humidity-gt80")
+        ],
+
+        "#temperaturas": () => [
+            createCard("characteristics", "temperature-cold"),
+            createCard("characteristics", "temperature-seasoned"),
+            createCard("characteristics", "temperature-hot"),
+            createCard("characteristics", "temperature-very-hot"),
+        ]
+    };
+
+    while(mainContent.firstChild) {
+        mainContent.removeChild(mainContent.firstChild);
+    }
+
+    const renderer = routes[hash];
+
+    if (renderer) {
+        const result = renderer();
+
+        if (typeof result === "string") {
+            mainContent.textContent = result;
+        } else if (Array.isArray(result)) {
+            result.forEach(el => mainContent.appendChild(el));
+        }
+
+    } else {
+        mainContent.textContent = "";
     }
 
     const mainEl = document.querySelector('main');

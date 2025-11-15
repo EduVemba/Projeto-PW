@@ -14,4 +14,8 @@ body.appendChild(header);
 body.appendChild(main);
 body.appendChild(footer);
 
+if (!window.location.hash) {
+    window.location.hash = "#orchids";
+}
+
 updateMainContent();

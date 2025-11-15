@@ -1,18 +1,15 @@
 "use strict";
 
-export function createCard(...content){
+//TODO: vai ir para a pagina de cada planta com uma lista que permite que possa ver elas individualmente
+export function createCard(path,content /*windowContent*/) {
     const card = document.createElement('div');
-    card.classList.add('card');
 
-    content.forEach(item => {
-       if (typeof item === 'string') {
-            const textEl = document.createElement('p');
-            textEl.textContent = item;
-            card.appendChild(textEl);
-        } else {
-            card.appendChild(item);
-        }
-    });
+    const image = document.createElement('img');
+    image.src = `./images/${path}/${content}.png`
+    image.classList.add('card-logo');
+
+    card.appendChild(image);
+    card.classList.add('card');
 
     return card;
 }

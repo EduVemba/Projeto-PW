@@ -110,3 +110,12 @@ TODO: deixar responsivo e com media queries.
     transition: all 0.3s ease;
     cursor: pointer;
 }
+
+
+/*    Scrollable Container */
+
+.scrollable-container {
+    max-height: 300px;
+    width: 60%;
+    overflow-y: auto;
+}

@@ -3,6 +3,7 @@
 // Agora exportamos funções para criar e atualizar o main, evitando efeitos colaterais
 // que executam durante a importação do módulo.
 import { createCard } from "./card.js";
+import { scrollabeDiv } from "./scrollable.js";
 
 
 const getCurrentWindowLocation = () => window.location.hash;
@@ -14,6 +15,15 @@ const mainHeader = () => {
     head.classList.add('main-header');
 
     const location = getCurrentWindowLocation();
+
+    if (location.startsWith('#card-')) {
+        const encoded = location.replace('#card-', '');
+        const cardName = decodeURIComponent(encoded);
+
+        text.textContent = cardName;
+        head.appendChild(text);
+        return head;
+    }
 
     switch (location) {
         case '#tipos':
@@ -89,7 +99,7 @@ export function updateMainContent() {
             createCard("Luz Forte","characteristics", "luminosity-strong-light")
         ],
 
-        "#todas": () => "TODO",
+        "#todas": () => scrollabeDiv("Todas","Conteudo"),
 
         "#tamanhos": () => [
             createCard("Miniatura","characteristics", "size-miniature"),

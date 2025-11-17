@@ -78,6 +78,18 @@ export function updateMainContent() {
     const mainContent = document.querySelector('.main-content');
     const hash = getCurrentWindowLocation();
 
+    if (hash.startsWith("#card-")) {
+        const cardName = decodeURIComponent(hash.replace("#card-", ""));
+        const page = scrollabeDiv(cardName);
+        
+        while(mainContent.firstChild) {
+            mainContent.removeChild(mainContent.firstChild);
+        }
+
+        mainContent.appendChild(page);
+        return;
+    }
+
     const routes = {
         "#tipos": () => [
             createCard("Tipo Híbrido","characteristics", "type-hybrid"),

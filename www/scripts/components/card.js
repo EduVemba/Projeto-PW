@@ -18,13 +18,7 @@ export function createCard(name, path,content) {
 
     
     card.addEventListener('click', () => {
-        const page = scrollabeDiv(name, content);
-        const mainContent = document.querySelector('.main-content');
-        
-        while(mainContent.firstChild) {
-            mainContent.removeChild(mainContent.firstChild);
-        };
-        mainContent.appendChild(page); 
+        window.location.hash = `#card-${encodeURIComponent(name)}`;
     });
     
 

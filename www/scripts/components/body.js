@@ -35,7 +35,7 @@ const mainHeader = () => {
             text.textContent = 'Tamanhos';
             break;
         default:
-            text.textContent = 'Orquídeas';
+            text.textContent = 'Géneros';
     }
 
     head.appendChild(text);
@@ -70,46 +70,46 @@ export function updateMainContent() {
 
     const routes = {
         "#tipos": () => [
-            createCard("characteristics", "type-hybrid"),
-            createCard("characteristics", "type-species")
+            createCard("Tipo Híbrido","characteristics", "type-hybrid"),
+            createCard("Tipo Especie","characteristics", "type-species")
         ],
 
         "#orchids": () => [
-            createCard("icons","bulbophyllum"),
-            createCard("icons","cattleya"),
-            createCard("icons","cymbidium"),
-            createCard("icons","paphiopedilum"),
-            createCard("icons","phalaenopsis")
+            createCard("bulbophyllum","icons","bulbophyllum"),
+            createCard("cattleya","icons","cattleya"),
+            createCard("cymbidium","icons","cymbidium"),
+            createCard("paphiopedilum","icons","paphiopedilum"),
+            createCard("phalaenopsis","icons","phalaenopsis")
         ],
 
         "#luminosidades": () => [
-            createCard("characteristics", "luminosity-full-shade"),
-            createCard("characteristics", "luminosity-shaded-light"),
-            createCard("characteristics", "luminosity-filtered-light"),
-            createCard("characteristics", "luminosity-strong-light")
+            createCard("Sombra Total","characteristics", "luminosity-full-shade"),
+            createCard("Luz Sombreada","characteristics", "luminosity-shaded-light"),
+            createCard("Luz Filtrada","characteristics", "luminosity-filtered-light"),
+            createCard("Luz Forte","characteristics", "luminosity-strong-light")
         ],
 
         "#todas": () => "TODO",
 
         "#tamanhos": () => [
-            createCard("characteristics", "size-miniature"),
-            createCard("characteristics", "size-small"),
-            createCard("characteristics", "size-medium"),
-            createCard("characteristics", "size-big")
+            createCard("Miniatura","characteristics", "size-miniature"),
+            createCard("Pequeno","characteristics", "size-small"),
+            createCard("Médio","characteristics", "size-medium"),
+            createCard("Grande","characteristics", "size-big")
         ],
 
         "#humidades": () => [
-            createCard("characteristics", "humidity-lt40"),
-            createCard("characteristics", "humidity-40-60"),
-            createCard("characteristics", "humidity-60-80"),
-            createCard("characteristics", "humidity-gt80")
+            createCard(">40%","characteristics", "humidity-lt40"),
+            createCard("40-60%","characteristics", "humidity-40-60"),
+            createCard("60-80%","characteristics", "humidity-60-80"),
+            createCard("<80%","characteristics", "humidity-gt80")
         ],
 
         "#temperaturas": () => [
-            createCard("characteristics", "temperature-cold"),
-            createCard("characteristics", "temperature-seasoned"),
-            createCard("characteristics", "temperature-hot"),
-            createCard("characteristics", "temperature-very-hot"),
+            createCard("Frio","characteristics", "temperature-cold"),
+            createCard("Temperado","characteristics", "temperature-seasoned"),
+            createCard("Quente","characteristics", "temperature-hot"),
+            createCard("Muito Quente","characteristics", "temperature-very-hot"),
         ]
     };
 

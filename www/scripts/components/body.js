@@ -89,6 +89,7 @@ export function updateMainContent() {
     const mainContent = document.querySelector('.main-content');
     const hash = getCurrentWindowLocation();
 
+    /*
     if (hash.startsWith("#editar-")) {
         const id = Number(hash.replace("#editar-", ""));
         const orchid = orchidsCollection.getTodos.find(o => o.getId() === id);
@@ -107,7 +108,7 @@ export function updateMainContent() {
         while(mainContent.firstChild) mainContent.removeChild(mainContent.firstChild);
         mainContent.appendChild(createOrchidForm());
         return;
-    }
+    }*/
 
     if (hash.startsWith("#card-")) {
     const cardName = decodeURIComponent(hash.replace("#card-", ""));

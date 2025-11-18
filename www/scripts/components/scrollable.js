@@ -1,7 +1,7 @@
 "use strict";
 
 import { OrchidsCollection  } from "../classes/orchidsCollection.js";
-import { Orchid } from "../classes/orchid.js";
+import { createOrchidForm } from "./formOrchids.js"
 
 
 // no card fazer on click para fazer 
@@ -10,8 +10,21 @@ export const scrollabeDiv = (header, type) => {
     page.classList.add('scrollable-container');
 
     const createBtn = document.createElement('span');
+
     createBtn.textContent = "+ Create Orchid";
     createBtn.classList.add('create-btn');
+
+    createBtn.addEventListener('click', () => {
+        const form = createOrchidForm();
+        
+        const mainContent = document.querySelector('.main-content')
+        
+        while(mainContent.firstChild){
+            mainContent.removeChild(mainContent.firstChild);    
+        }
+
+        mainContent.appendChild(form);
+    })
 
     const inner = document.createElement('ul');
 
@@ -22,16 +35,13 @@ export const scrollabeDiv = (header, type) => {
             const li = document.createElement('li');
             li.classList.add('orchid');
 
-            // Cria um span para o texto (ID + nome)
             const textSpan = document.createElement('span');
             textSpan.textContent = `${orchid.getId()} - ${orchid.getDescription()}`;
 
-            // Cria o menu span
             const liMenu = document.createElement('span');
             liMenu.classList.add('orchid-menu');
             liMenu.textContent = ":";
 
-            // Adiciona ambos ao li (ordem: texto primeiro, menu depois)
             li.appendChild(textSpan);
             li.appendChild(liMenu);
 

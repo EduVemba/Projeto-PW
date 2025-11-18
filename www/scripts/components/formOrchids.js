@@ -1,12 +1,15 @@
-import { orchidsCollection } from "../index.js";
+import { OrchidsCollection } from "../classes/orchidsCollection.js";
 import { data } from "../data/data.js";
 
-export function createOrchidForm(orchid = null){
+// avoid circular import with index.js by using a local collection instance
+const orchidsCollection = new OrchidsCollection();
+
+export function createOrchidForm(){
     const form = document.createElement("form");
     form.className = "orchid-form";
 
     const title = document.createElement("h2");
-    title.textContent = orchid ? "Editar Orquídea" : "Nova Orquídea";
+    title.textContent = "Nova Orquídea";
     form.appendChild(title);
 
     const createInput = (labelText, name, value = "") => {
@@ -53,19 +56,19 @@ export function createOrchidForm(orchid = null){
         return div;
     };
 
-    form.appendChild(createInput("Nome:", "description", orchid?.description || ""));
+    form.appendChild(createInput("Nome:", "description", ""));
     
-    form.appendChild(createSelect("Género:", "genus", data.genus, orchid?.genus));
-    form.appendChild(createSelect("Tipo:", "type", data.type, orchid?.type));
-    form.appendChild(createSelect("Luminosidade:", "luminosity", data.luminosity, orchid?.luminosity));
-    form.appendChild(createSelect("Temperatura:", "temperature", data.temperature, orchid?.temperature));
-    form.appendChild(createSelect("Humidade:", "humidity", data.humidity, orchid?.humidity));
-    form.appendChild(createSelect("Tamanho:", "size", data.size, orchid?.size));
+    form.appendChild(createSelect("Género:", "genus", data.genus, null));
+    form.appendChild(createSelect("Tipo:", "type", data.type, null));
+    form.appendChild(createSelect("Luminosidade:", "luminosity", data.luminosity, null));
+    form.appendChild(createSelect("Temperatura:", "temperature", data.temperature, null));
+    form.appendChild(createSelect("Humidade:", "humidity", data.humidity, null));
+    form.appendChild(createSelect("Tamanho:", "size", data.size, null));
 
-    form.appendChild(createInput("Imagem (src):", "image_src", orchid?.image_src || ""));
+    form.appendChild(createInput("Imagem (src):", "image_src", ""));
 
     const button = document.createElement("button");
-    button.textContent = orchid ? "Guardar Alterações" : "Criar Orquídea";
+    button.textContent = "Criar Orquídea";
     button.type = "submit";
     form.appendChild(button);
 
@@ -86,11 +89,7 @@ export function createOrchidForm(orchid = null){
         };
 
         try {
-            if (orchid) {
-                orchidsCollection.editOrchid(orchid.id, novaOrquidea);
-            } else {
-                orchidsCollection.createOrchid(novaOrquidea);
-            }
+            orchidsCollection.createOrchid(novaOrquidea);
 
             document.dispatchEvent(new Event("navigate-home"));
 

@@ -5,7 +5,6 @@
 import { createCard } from "./card.js";
 import { scrollabeDiv } from "./scrollable.js";
 
-
 const getCurrentWindowLocation = () => window.location.hash;
 
 // Cria o header interno do main com base no hash atual
@@ -21,6 +20,18 @@ const mainHeader = () => {
         const cardName = decodeURIComponent(encoded);
 
         text.textContent = cardName;
+        head.appendChild(text);
+        return head;
+    }
+
+    if(location === "#nova"){
+        text.textContent = "Nova Orquídea";
+        head.appendChild(text);
+        return head;
+    }
+
+    if(location.startsWith("#editar-")){
+        text.textContent = "Editar Orquídea";
         head.appendChild(text);
         return head;
     }
@@ -77,6 +88,26 @@ export function updateMainContent() {
 
     const mainContent = document.querySelector('.main-content');
     const hash = getCurrentWindowLocation();
+
+    if (hash.startsWith("#editar-")) {
+        const id = Number(hash.replace("#editar-", ""));
+        const orchid = orchidsCollection.getTodos.find(o => o.getId() === id);
+
+        while(mainContent.firstChild) mainContent.removeChild(mainContent.firstChild);
+
+        mainContent.appendChild(
+            orchid ? createOrchidForm(orchid)
+                   : document.createTextNode("Orquídea não encontrada.")
+        );
+
+        return;
+    }
+
+    if (hash === "#nova") {
+        while(mainContent.firstChild) mainContent.removeChild(mainContent.firstChild);
+        mainContent.appendChild(createOrchidForm());
+        return;
+    }
 
     if (hash.startsWith("#card-")) {
     const cardName = decodeURIComponent(hash.replace("#card-", ""));

@@ -7,9 +7,6 @@ import { data } from '../data/data.js';
  * 
  */
 
-
-
-
 export class OrchidsCollection {
     #orchids = [];
 
@@ -35,5 +32,50 @@ export class OrchidsCollection {
         return this.#orchids;
     }
 
-    //get LowLuminosity(){}
+    getLowLuminosity() {
+        return this.#orchids.filter(o => o.getLuminosity() === 1);
+    }
+
+    createOrchid(obj) {
+        const id = this.#orchids.length + 1;
+        const orchid = new Orchid(
+            id,
+            obj.description,
+            obj.genus,
+            obj.type,
+            obj.luminosity,
+            obj.temperature,
+            obj.humidity,
+            obj.size,
+            obj.image_src
+        );
+
+        this.#orchids.push(orchid);
+        return orchid;
+    }
+
+    editOrchid(id, newData) {
+        const orchid = this.#orchids.find(o => o.getId() === id);
+        if (!orchid) throw new Error("Orquídea não encontrada!");
+
+        if (newData.description) orchid.setDescription(newData.description);
+        if (newData.genus) orchid.setGenus(newData.genus);
+        if (newData.type) orchid.setType(newData.type);
+        if (newData.luminosity) orchid.setLuminosity(newData.luminosity);
+        if (newData.temperature) orchid.setTemperature(newData.temperature);
+        if (newData.humidity) orchid.setHumidity(newData.humidity);
+        if (newData.size) orchid.setSize(newData.size);
+        if (newData.image_src) orchid.setImageSrc(newData.image_src);
+
+        return orchid;
+    }
+
+    deleteOrchid(id) {
+        const before = this.#orchids.length;
+        this.#orchids = this.#orchids.filter(o => o.getId() !== id);
+
+        if (this.#orchids.length === before) {
+            throw new Error("Orquídea não encontrada para apagar!");
+        }
+    }
 }

@@ -46,6 +46,7 @@ TODO: deixar responsivo e com media queries.
     font-size: 18px;
     border: none;
     border-radius: 20px;
+    transition: all 0.5s ease;
 }
 
 .menu-reference:hover {
@@ -89,6 +90,7 @@ TODO: deixar responsivo e com media queries.
     align-items: center;
     text-align: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
 }
 
 .card-logo  {
@@ -107,7 +109,7 @@ TODO: deixar responsivo e com media queries.
 .card:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transform: translateY(-5px);
-    transition: all 0.3s ease;
+    transition: all 0.6s ease;
     cursor: pointer;
 }
 
@@ -115,7 +117,26 @@ TODO: deixar responsivo e com media queries.
 /*    Scrollable Container */
 
 .scrollable-container {
+    display: flex;
+    flex-direction: column;
     max-height: 300px;
     width: 60%;
+}
+
+.scrollable-content {
     overflow-y: auto;
+    flex: 1;
+}
+
+.create-btn {
+    color: var(--primary-color);
+    align-self: flex-end;
+    border-radius: 5px;
+    transition: all 0.5s ease;
+}
+
+.create-btn:hover {
+    background-color: #a3eaa5;
+    transition: all 0.5s ease;
+    cursor: pointer;
 }

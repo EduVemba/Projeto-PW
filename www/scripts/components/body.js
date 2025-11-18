@@ -79,16 +79,18 @@ export function updateMainContent() {
     const hash = getCurrentWindowLocation();
 
     if (hash.startsWith("#card-")) {
-        const cardName = decodeURIComponent(hash.replace("#card-", ""));
-        const page = scrollabeDiv(cardName);
-        
-        while(mainContent.firstChild) {
-            mainContent.removeChild(mainContent.firstChild);
-        }
-
-        mainContent.appendChild(page);
-        return;
+    const cardName = decodeURIComponent(hash.replace("#card-", ""));
+    let type = cardName === "Todas" ? "TODOS" : "";
+    const page = scrollabeDiv(cardName, type);
+    
+    while(mainContent.firstChild) {
+        mainContent.removeChild(mainContent.firstChild);
     }
+
+    mainContent.appendChild(page);
+    return;
+}
+
 
     const routes = {
         "#tipos": () => [
@@ -111,7 +113,7 @@ export function updateMainContent() {
             createCard("Luz Forte","characteristics", "luminosity-strong-light")
         ],
 
-        "#todas": () => scrollabeDiv("Todas","Conteudo"),
+        "#todas": () => scrollabeDiv("Todas","TODOS"),
 
         "#tamanhos": () => [
             createCard("Miniatura","characteristics", "size-miniature"),
@@ -135,6 +137,7 @@ export function updateMainContent() {
         ]
     };
 
+    
     while(mainContent.firstChild) {
         mainContent.removeChild(mainContent.firstChild);
     }
@@ -142,14 +145,15 @@ export function updateMainContent() {
     const renderer = routes[hash];
 
     if (renderer) {
-        const result = renderer();
+    const result = renderer();
 
-        if (typeof result === "string") {
-            mainContent.textContent = result;
-        } else if (Array.isArray(result)) {
-            result.forEach(el => mainContent.appendChild(el));
-        }
-
+    if (result instanceof HTMLElement) {
+        mainContent.appendChild(result);
+    } else if (Array.isArray(result)) {
+        result.forEach(el => mainContent.appendChild(el));
+    } else if (typeof result === "string") {
+        mainContent.textContent = result;
+    }
     } else {
         mainContent.textContent = "";
     }
@@ -159,3 +163,7 @@ export function updateMainContent() {
 }
 
 window.addEventListener('hashchange', updateMainContent);
+
+window.addEventListener('DOMContentLoaded', () => {
+    updateMainContent();
+})

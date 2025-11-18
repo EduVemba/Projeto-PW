@@ -8,7 +8,8 @@ export class Orchid {
     #temperature;
     #humidity;
     #size;
-    #image_src;
+    #src;
+    #createdDate;
 
     /**
      * @param {number} id
@@ -21,7 +22,7 @@ export class Orchid {
      * @param {number} size
      * @param {string} image_src
      */
-    constructor(id,description, genus, type, luminosity, temperature, humidity, size, image_src) {
+    constructor(id,description, genus, type, luminosity, temperature, humidity, size, src, createdDate) {
         //FIXME: Notice Solução temporaria para checagem de tipos ou final.
         if (typeof id !== "number") throw new TypeError("id deve ser número");
         if (typeof description !== "string") throw new TypeError("description deve ser string");
@@ -31,7 +32,7 @@ export class Orchid {
         if (typeof temperature !== "number") throw new TypeError("temperature deve ser número");
         if (typeof humidity !== "number") throw new TypeError("humidity deve ser número");
         if (typeof size !== "number") throw new TypeError("size deve ser número");
-        if (typeof image_src !== "string") throw new TypeError("image_src deve ser string");
+        if (typeof src !== "string") throw new TypeError("image_src deve ser string");
 
         this.#id = id;
         this.#description = description;
@@ -41,7 +42,8 @@ export class Orchid {
         this.#temperature = temperature;
         this.#humidity = humidity;
         this.#size = size;
-        this.#image_src = image_src;
+        this.#src = src;
+        this.#createdDate = createdDate || new Date();
     }
 
     getId(){return this.#id;}
@@ -52,7 +54,7 @@ export class Orchid {
     getTemperature(){return this.#temperature;}
     getHumidity(){return this.#humidity;}
     getSize(){return this.#size;}
-    getImageSrc(){return this.#image_src;}
+    getImageSrc(){return this.#src;}
 
      setDescription(value) {
         if (typeof value !== "string") throw new TypeError("description deve ser string");
@@ -84,7 +86,7 @@ export class Orchid {
     }
     setImageSrc(value) {
         if (typeof value !== "string") throw new TypeError("image_src deve ser string");
-        this.#image_src = value;
+        this.#src = value;
     }
 
     toCardElement(){
@@ -92,7 +94,7 @@ export class Orchid {
         card.className = "orchid-card";
 
         const img = document.createElement("img");
-        img.src = this.#image_src;
+        img.src = this.#src;
         img.alt = this.#description;
 
         const name = document.createElement("h3");
@@ -100,6 +102,12 @@ export class Orchid {
 
         card.append(img,name);
         return card;
+    }
+
+    getCreatedDate(){return this.#createdDate;}
+    setCreatedDate(value) {
+        if (!(value instanceof Date)) throw new TypeError("createdDate deve ser Date");
+        this.#createdDate = value;
     }
 
 }

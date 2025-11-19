@@ -1,14 +1,18 @@
 import { OrchidsCollection } from "../classes/orchidsCollection.js";
 import { data } from "../data/data.js";
+import { createFooter } from "./footer.js";
 
 // avoid circular import with index.js by using a local collection instance
 const orchidsCollection = new OrchidsCollection();
 
 export function createOrchidForm(){
+    const formContainer = document.createElement('div');
+    formContainer.className = "form-container";
+
     const form = document.createElement("form");
     form.className = "orchid-form";
 
-    const title = document.createElement("h2");
+    const title = document.createElement("h1");
     title.textContent = "Nova Orquídea";
     form.appendChild(title);
 
@@ -70,7 +74,6 @@ export function createOrchidForm(){
     const button = document.createElement("button");
     button.textContent = "Criar Orquídea";
     button.type = "submit";
-    form.appendChild(button);
 
     form.addEventListener("submit", (event) => {
         event.preventDefault();
@@ -98,5 +101,11 @@ export function createOrchidForm(){
         }
     });
 
-    return form;
+    const footer = createFooter("","form-footer");
+    footer.appendChild(button);
+    form.appendChild(footer);
+
+    formContainer.appendChild(form);
+
+    return formContainer;
 }

@@ -32,6 +32,9 @@ export const scrollabeDiv = (header, type) => {
     
     if (type === "TODOS") {
         data.getTodos.forEach(orchid => {
+            const hr = document.createElement('hr');
+            hr.className = "ul-hr"
+
             const li = document.createElement('li');
             li.classList.add('orchid');
 
@@ -45,6 +48,7 @@ export const scrollabeDiv = (header, type) => {
             li.appendChild(textSpan);
             li.appendChild(liMenu);
 
+            inner.appendChild(hr)
             inner.appendChild(li);
         });
     }

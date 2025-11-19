@@ -147,6 +147,7 @@ TODO: deixar responsivo e com media queries.
 .orchid {
     display: flex;
     list-style-type: none;
+    color: rgba(11, 82, 14, 0.7);
     background-color: rgb(243, 255, 240, 0.5);
     border-radius: 10px;
     padding: 5px;
@@ -154,8 +155,14 @@ TODO: deixar responsivo e com media queries.
     justify-content: space-between;
 }
 
+.ul-hr {
+     border: none;
+     border-top: 2px solid #b0ecb2;
+}
+
 .orchid-menu  {
-    background-color: rgb(229, 251, 224, 0.5);   
+    background-color: rgb(255, 255, 255);
+    color: #164918;   
     border-radius: 15px;
     padding-left: 5px;
     padding-right: 5px;
@@ -164,7 +171,32 @@ TODO: deixar responsivo e com media queries.
 }
 
 .orchid-menu:hover{
-     background-color: rgba(196, 241, 185, 0.5);
+     background-color: rgba(151, 195, 140, 0.5);
      transition: all 0.4s ease;
      cursor: pointer;
+}
+
+.form-container {
+    min-width: 90%;
+    min-height: 450px;
+}
+
+.orchid-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-footer {
+    position: fixed;
+    bottom: 10%;
+    left: 1%;
+    right: 1%;
+    height: 5%;
+    background-color: var(--primary-color);
+    color: var(--text-primary-color);
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+    border-radius: 20px 20px 20px 20px;
 }

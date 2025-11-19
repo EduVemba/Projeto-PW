@@ -1,9 +1,37 @@
-import { OrchidsCollection } from "../classes/orchidsCollection.js";
+import { orchidsCollection } from "../state/orchidsInstance.js";
 import { data } from "../data/data.js";
 import { createFooter } from "./footer.js";
 
-// avoid circular import with index.js by using a local collection instance
-const orchidsCollection = new OrchidsCollection();
+//FIXME: quando pega um do mesmo nome tem que atualizar.
+function validateAndCreateOrchid(formData) {
+    const genusId = Number(formData.get("genus"));
+    const genusDescription = data.genus.find(g => g.id === genusId)?.description
+    
+    const description = `${genusDescription} ${(formData.get("description") || "").toString().trim()}`;
+    if (!description) throw new Error("Nome (description) é obrigatório.");
+
+    const toNum = (key) => {
+        const v = formData.get(key);
+        if (v === null || v === "") throw new Error(`${key} é obrigatório.`);
+        const n = Number(v);
+        if (Number.isNaN(n)) throw new Error(`${key} deve ser número válido.`);
+        return n;
+    };
+
+    const novaOrquidea = {
+        description,
+        genus: genusId,
+        type: toNum("type"),
+        luminosity: toNum("luminosity"),
+        temperature: toNum("temperature"),
+        humidity: toNum("humidity"),
+        size: toNum("size"),
+        image_src: (formData.get("image_src") || "").toString().trim()
+    };
+
+    const created = orchidsCollection.createOrchid(novaOrquidea);
+    return created;
+}
 
 export function createOrchidForm(){
     const formContainer = document.createElement('div');
@@ -78,26 +106,18 @@ export function createOrchidForm(){
     form.addEventListener("submit", (event) => {
         event.preventDefault();
 
-        const formData = new FormData(form);
-
-        const novaOrquidea = {
-            description: formData.get("description"),
-            genus: Number(formData.get("genus")),
-            type: Number(formData.get("type")),
-            luminosity: Number(formData.get("luminosity")),
-            temperature: Number(formData.get("temperature")),
-            humidity: Number(formData.get("humidity")),
-            size: Number(formData.get("size")),
-            image_src: formData.get("image_src")
-        };
-
         try {
-            orchidsCollection.createOrchid(novaOrquidea);
+            const formData = new FormData(form);
+            const created = validateAndCreateOrchid(formData);
+            
+            console.log("Orquídea criada com sucesso:", created);
 
-            document.dispatchEvent(new Event("navigate-home"));
+            form.reset();
+
+            window.location.hash = "#card-Todas";
 
         } catch (error) {
-            alert(error.message);
+            alert("Erro: " + error.message);
         }
     });
 

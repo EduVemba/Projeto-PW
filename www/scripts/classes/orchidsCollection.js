@@ -28,14 +28,6 @@ export class OrchidsCollection {
     }
 
 
-    get getTodos(){
-        return this.#orchids;
-    }
-
-    getLowLuminosity() {
-        return this.#orchids.filter(o => o.getLuminosity() === 1);
-    }
-
     createOrchid(obj) {
         const id = this.#orchids.length + 1;
         const orchid = new Orchid(
@@ -47,11 +39,20 @@ export class OrchidsCollection {
             obj.temperature,
             obj.humidity,
             obj.size,
-            obj.image_src
+            obj.image_src || obj.src,
+            new Date()
         );
 
         this.#orchids.push(orchid);
         return orchid;
+    }
+
+    get getTodos(){
+        return this.#orchids;
+    }
+
+    getLowLuminosity() {
+        return this.#orchids.filter(o => o.getLuminosity() === 1);
     }
 
     editOrchid(id, newData) {

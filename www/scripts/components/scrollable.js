@@ -1,10 +1,9 @@
 "use strict";
 
-import { OrchidsCollection  } from "../classes/orchidsCollection.js";
+import { orchidsCollection } from "../state/orchidsInstance.js";
 import { createOrchidForm } from "./formOrchids.js"
 
 
-// no card fazer on click para fazer 
 export const scrollabeDiv = (header, type) => {
     const page = document.createElement('div');
     page.classList.add('scrollable-container');
@@ -27,11 +26,9 @@ export const scrollabeDiv = (header, type) => {
     })
 
     const inner = document.createElement('ul');
-
-    const data = new OrchidsCollection();
     
     if (type === "TODOS") {
-        data.getTodos.forEach(orchid => {
+        orchidsCollection.getTodos.forEach(orchid => {
             const hr = document.createElement('hr');
             hr.className = "ul-hr"
 

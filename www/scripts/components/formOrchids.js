@@ -34,28 +34,28 @@ function validateAndCreateOrchid(formData) {
 }
 
 export function createOrchidForm(){
-    const formContainer = document.createElement('div');
+    const formContainer     = document.createElement('div');
     formContainer.className = "form-container";
 
-    const form = document.createElement("form");
-    form.className = "orchid-form";
+    const form      = document.createElement("form");
+    form.className  = "orchid-form";
 
-    const title = document.createElement("h1");
-    title.textContent = "Nova Orquídea";
+    const title         = document.createElement("h1");
+    title.textContent   = "Nova Orquídea";
     form.appendChild(title);
 
     const createInput = (labelText, name, value = "") => {
         const div = document.createElement("div");
 
-        const label = document.createElement("label");
-        label.textContent = labelText;
-        label.htmlFor = name;
+        const label         = document.createElement("label");
+        label.textContent   = labelText;
+        label.htmlFor       = name;
 
-        const input = document.createElement("input");
-        input.type = "text";
-        input.name = name;
-        input.id = name;
-        input.value = value;
+        const input         = document.createElement("input");
+        input.type          = "text";
+        input.name          = name;
+        input.id            = name;
+        input.value         = value;
 
         div.appendChild(label);
         div.appendChild(input);

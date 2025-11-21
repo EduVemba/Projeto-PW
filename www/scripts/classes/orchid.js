@@ -25,39 +25,39 @@ export class Orchid {
      * @param {Date} createdDate
      */
     constructor(id, description, genus, type, luminosity, temperature, humidity, size, src, createdDate) {
-        if (typeof id !== "number") throw new TypeError("id deve ser número");
-        if (typeof description !== "string") throw new TypeError("description deve ser string");
-        if (typeof genus !== "number") throw new TypeError("genus deve ser número");
-        if (typeof type !== "number") throw new TypeError("type deve ser número");
-        if (typeof luminosity !== "number") throw new TypeError("luminosity deve ser número");
-        if (typeof temperature !== "number") throw new TypeError("temperature deve ser número");
-        if (typeof humidity !== "number") throw new TypeError("humidity deve ser número");
-        if (typeof size !== "number") throw new TypeError("size deve ser número");
-        if (typeof src !== "string") throw new TypeError("src deve ser string");
+        if (typeof id           !== "number") throw new TypeError("id deve ser número");
+        if (typeof description  !== "string") throw new TypeError("description deve ser string");
+        if (typeof genus        !== "number") throw new TypeError("genus deve ser número");
+        if (typeof type         !== "number") throw new TypeError("type deve ser número");
+        if (typeof luminosity   !== "number") throw new TypeError("luminosity deve ser número");
+        if (typeof temperature  !== "number") throw new TypeError("temperature deve ser número");
+        if (typeof humidity     !== "number") throw new TypeError("humidity deve ser número");
+        if (typeof size         !== "number") throw new TypeError("size deve ser número");
+        if (typeof src          !== "string") throw new TypeError("src deve ser string");
 
-        this.#id = id;
-        this.#description = description;
-        this.#genus = genus;
-        this.#type = type;
-        this.#luminosity = luminosity;
-        this.#temperature = temperature;
-        this.#humidity = humidity;
-        this.#size = size;
-        this.#src = src;
-        this.#createdDate = createdDate || new Date();
+        this.#id            = id;
+        this.#description   = description;
+        this.#genus         = genus;
+        this.#type          = type;
+        this.#luminosity    = luminosity;
+        this.#temperature   = temperature;
+        this.#humidity      = humidity;
+        this.#size          = size;
+        this.#src           = src;
+        this.#createdDate   = createdDate || new Date();
     }
 
     // GETTERS
-    getId(){ return this.#id; }
-    getDescription(){ return this.#description; }
-    getGenus(){ return this.#genus; }
-    getType(){ return this.#type; }
-    getLuminosity(){ return this.#luminosity; }
-    getTemperature(){ return this.#temperature; }
-    getHumidity(){ return this.#humidity; }
-    getSize(){ return this.#size; }
-    getImageSrc(){ return this.#src; }
-    getCreatedDate(){ return this.#createdDate; }
+    getId(){            return this.#id; }
+    getDescription(){   return this.#description; }
+    getGenus(){         return this.#genus; }
+    getType(){          return this.#type; }
+    getLuminosity(){    return this.#luminosity; }
+    getTemperature(){   return this.#temperature; }
+    getHumidity(){      return this.#humidity; }
+    getSize(){          return this.#size; }
+    getImageSrc(){      return this.#src; }
+    getCreatedDate(){   return this.#createdDate; }
 
     // SETTERS
     setDescription(value) {
@@ -114,8 +114,8 @@ export class Orchid {
         img.src = this.#src;
         img.alt = this.#description;
 
-        const name = document.createElement("h3");
-        name.textContent = this.#description;
+        const name          = document.createElement("h3");
+        name.textContent    = this.#description;
 
         card.append(img, name);
         return card;

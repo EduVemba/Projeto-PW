@@ -4,6 +4,7 @@
 // que executam durante a importação do módulo.
 import { createCard } from "./card.js";
 import { scrollabeDiv } from "./scrollable.js";
+import { clearMainContent } from "../utils/windowUtils.js";
 
 const getCurrentWindowLocation = () => window.location.hash;
 
@@ -16,8 +17,8 @@ const mainHeader = () => {
     const location = getCurrentWindowLocation();
 
     if (location.startsWith('#card-')) {
-        const encoded = location.replace('#card-', '');
-        const cardName = decodeURIComponent(encoded);
+        const encoded   = location.replace('#card-', '');
+        const cardName  = decodeURIComponent(encoded);
 
         text.textContent = cardName;
         head.appendChild(text);
@@ -88,27 +89,6 @@ export function updateMainContent() {
 
     const mainContent = document.querySelector('.main-content');
     const hash = getCurrentWindowLocation();
-
-    /*
-    if (hash.startsWith("#editar-")) {
-        const id = Number(hash.replace("#editar-", ""));
-        const orchid = orchidsCollection.getTodos.find(o => o.getId() === id);
-
-        while(mainContent.firstChild) mainContent.removeChild(mainContent.firstChild);
-
-        mainContent.appendChild(
-            orchid ? createOrchidForm(orchid)
-                   : document.createTextNode("Orquídea não encontrada.")
-        );
-
-        return;
-    }
-
-    if (hash === "#nova") {
-        while(mainContent.firstChild) mainContent.removeChild(mainContent.firstChild);
-        mainContent.appendChild(createOrchidForm());
-        return;
-    }*/
 
     if (hash.startsWith("#card-")) {
     const cardName = decodeURIComponent(hash.replace("#card-", ""));

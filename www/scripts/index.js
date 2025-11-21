@@ -1,4 +1,3 @@
-//TODO: ficheiro principal que vai gerenciar a aplicação
 import { createHeader } from './components/header.js';
 import { createFooter } from './components/footer.js';
 import { createMain, updateMainContent } from './components/body.js';

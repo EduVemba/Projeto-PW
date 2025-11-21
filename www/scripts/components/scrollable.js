@@ -1,7 +1,9 @@
 "use strict";
 
-import { orchidsCollection } from "../state/orchidsInstance.js";
-import { createOrchidForm } from "./formOrchids.js"
+import { orchidsCollection }    from "../state/orchidsInstance.js";
+import { createOrchidForm }     from "./formOrchids.js"
+import { orchidPage } from "./orchid.js";
+import { clearMainContent } from "../utils/windowUtils.js";
 
 
 export const scrollabeDiv = (header, type) => {
@@ -37,6 +39,16 @@ export const scrollabeDiv = (header, type) => {
 
             const textSpan = document.createElement('span');
             textSpan.textContent = `${orchid.getId()} - ${orchid.getDescription()}`;
+
+            textSpan.className = 'orchid-elem';
+
+            textSpan.addEventListener("click", () => {
+                const mainContent = document.querySelector('.main-content');
+                while (mainContent.firstChild){
+                    mainContent.removeChild(mainContent.firstChild);
+                }
+                mainContent.appendChild(orchidPage(orchid));
+            })
 
             const liMenu = document.createElement('span');
             liMenu.classList.add('orchid-menu');

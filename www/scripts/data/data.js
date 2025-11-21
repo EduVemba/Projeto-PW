@@ -1,5 +1,4 @@
 "use strict";
-//TODO: Criar uma classe que representa as orquideas
 export let data = {
     genus: [
         { id: 1, description: "Bulbophyllum" },

@@ -4,9 +4,9 @@ import { scrollabeDiv } from "./scrollable.js";
 
 //TODO: vai ir para a pagina de cada planta com uma lista que permite que possa ver elas individualmente
 export function createCard(name, path,content) {
-    const card = document.createElement('div');
-    const cardName = document.createElement('p')
-    cardName.textContent = name;
+    const card              = document.createElement('div');
+    const cardName          = document.createElement('p')
+    cardName.textContent    = name;
 
     const image = document.createElement('img');
     image.src = `./images/${path}/${content}.png`

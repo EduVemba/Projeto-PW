@@ -6,6 +6,11 @@
 /*
 TODO: deixar responsivo e com media queries.
 */
+/*
+main:div {
+    display: flex;
+    flex-direction: column;
+}*/
 
 .site-header {
     background-color: var(--primary-color);
@@ -155,6 +160,18 @@ TODO: deixar responsivo e com media queries.
     justify-content: space-between;
 }
 
+.orchid-elem {
+    border-radius: 5px;
+    transition: all 0.4s ease;
+}
+
+.orchid-elem:hover {
+    transform: translateY(-2px);
+    cursor: pointer;
+    background-color: #a3eaa5;
+    transition: all 0.4s ease;
+}
+
 .ul-hr {
      border: none;
      border-top: 2px solid #b0ecb2;
@@ -199,4 +216,33 @@ TODO: deixar responsivo e com media queries.
     text-align: center;
     font-size: 14px;
     border-radius: 20px 20px 20px 20px;
+}
+
+/*   orchids-Information    */
+
+.characteristic-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 10px;
+    padding: 10px;
+}
+
+.characteristic-icon {
+    max-width: 30px;
+    max-height: 30px;
+}
+
+.orchid-content {
+    display: flex;
+    align-self: flex-start;
+    min-width: 70%;
+    min-height: 100%;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.orchid-main-image {
+    max-width: 300px;
+    max-height: 300px;
 }

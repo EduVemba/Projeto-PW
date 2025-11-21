@@ -95,9 +95,7 @@ export function updateMainContent() {
     let type = cardName === "Todas" ? "TODOS" : "";
     const page = scrollabeDiv(cardName, type);
     
-    while(mainContent.firstChild) {
-        mainContent.removeChild(mainContent.firstChild);
-    }
+    clearMainContent();
 
     mainContent.appendChild(page);
     return;
@@ -150,9 +148,7 @@ export function updateMainContent() {
     };
 
     
-    while(mainContent.firstChild) {
-        mainContent.removeChild(mainContent.firstChild);
-    }
+    clearMainContent();
 
     const renderer = routes[hash];
 

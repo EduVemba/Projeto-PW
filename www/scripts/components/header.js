@@ -26,6 +26,7 @@ export function createHeader() {
     header.appendChild(createMenuButton('Humidades', '#humidades'));
     header.appendChild(createMenuButton('Tamanhos', '#tamanhos'));
     header.appendChild(createMenuButton('Todas', '#todas'));
+    header.appendChild(createMenuButton('Sobre','#about'));
 
     return header;
 }

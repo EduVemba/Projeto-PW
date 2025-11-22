@@ -37,6 +37,12 @@ const mainHeader = () => {
         return head;
     }
 
+    if(location === "#about"){
+        text.textContent = "Sobre";
+        head.appendChild(text);
+        return head;
+    }
+
     switch (location) {
         case '#tipos':
             text.textContent = 'Tipos';
@@ -144,7 +150,11 @@ export function updateMainContent() {
             createCard("Temperado","characteristics", "temperature-seasoned"),
             createCard("Quente","characteristics", "temperature-hot"),
             createCard("Muito Quente","characteristics", "temperature-very-hot"),
-        ]
+        ],
+
+        "#about": () => {
+            import("../pages/about.js").then(module => module.renderAboutPage(mainContent));
+        }
     };
 
     

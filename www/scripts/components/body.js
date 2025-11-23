@@ -5,6 +5,7 @@
 import { createCard } from "./card.js";
 import { scrollabeDiv } from "./scrollable.js";
 import { clearMainContent } from "../utils/windowUtils.js";
+import { renderAboutPage } from "../pages/about.js";
 
 const getCurrentWindowLocation = () => window.location.hash;
 
@@ -152,9 +153,8 @@ export function updateMainContent() {
             createCard("Muito Quente","characteristics", "temperature-very-hot"),
         ],
 
-        "#about": () => {
-            import("../pages/about.js").then(module => module.renderAboutPage(mainContent));
-        }
+        "#about": () => renderAboutPage(),
+
     };
 
     

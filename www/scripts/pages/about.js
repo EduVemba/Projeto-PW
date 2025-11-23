@@ -26,7 +26,7 @@ export function renderAboutPage(){
         "Eduardo Vemba",
         "202300364",
         "Futebol e Programação",
-        "#", 
+        "https://www.instagram.com/eduardovembaa/?next=%2F", 
         "mailto:202300364@estudantes.ips.pt"        
     ));
 

@@ -69,13 +69,6 @@ export function createCardAbout(name,num,description, instagramUrl, outlookUrl){
     card.appendChild(number);
     card.appendChild(desc);
     card.appendChild(iconsDiv);
-
-    
-
-   
-    card.addEventListener('click', () => {
-        window.location.hash = `#card-${encodeURIComponent(name)}`;
-    });
     
 
     return card;

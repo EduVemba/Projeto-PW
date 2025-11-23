@@ -1,6 +1,7 @@
 "use strict"
 
 import { clearMainContent } from "../utils/windowUtils.js";
+import { createCardAbout } from "../components/card.js";
 
 /**
  * Refazer o main-content para carregar o about page
@@ -8,16 +9,15 @@ import { clearMainContent } from "../utils/windowUtils.js";
 export function renderAboutPage(){
 
     const mainContent = document.querySelector(".main-content");
-
     clearMainContent();
 
-    /*TODO : João Freitas
+    const aboutContainer = document.createElement("div");
+    aboutContainer.className = "about-container";
 
-      deixar oo visual mais apelativo no css
-    */
+    aboutContainer.appendChild(createCardAbout("João Freitas ","2024151451","Rugby e Programação"));
+    aboutContainer.appendChild(createCardAbout("Eduardo Vemba","202300364","Futebol e Programação"));
+    mainContent.appendChild(aboutContainer);
 
-    mainContent.appendChild(cards("Eduardo Vemba"))
-    mainContent.appendChild(cards("João Freitas"))
 }
 
 /**
@@ -25,7 +25,7 @@ export function renderAboutPage(){
  * @param {*} name 
  * @returns 
  */
-const cards = (name) => {
+  const cards = (name) => {
 
     const card = document.createElement("div");
     card.className = "about-card"

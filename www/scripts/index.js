@@ -7,7 +7,7 @@ const body = document.body;
 
 const header = createHeader();
 const main = createMain();
-const footer = createFooter("© 2025 Orchids Inc. || Eduardo Vemba & João Freitas.", "site-footer");
+const footer = createFooter("© 2025 Orchids Inc. || Eduardo Vemba & João Freitas", "site-footer");
 
 body.appendChild(header);
 body.appendChild(main);

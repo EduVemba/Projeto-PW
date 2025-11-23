@@ -1,7 +1,5 @@
 "use strict";
 
-import { scrollabeDiv } from "./scrollable.js";
-
 //TODO: vai ir para a pagina de cada planta com uma lista que permite que possa ver elas individualmente
 export function createCard(name, path,content) {
     const card              = document.createElement('div');
@@ -24,3 +22,32 @@ export function createCard(name, path,content) {
 
     return card;
 }
+
+export function createCardAbout(name,num,description){
+    const card = document.createElement('div');
+     card.classList.add('card','about-card');
+
+    const cardName = document.createElement('p');
+    cardName.textContent = name;
+
+    const number = document.createElement('p');
+    number.textContent = num;
+
+    const desc = document.createElement('p');
+    desc.textContent = description;
+
+    card.appendChild(cardName);
+    card.appendChild(number);
+    card.appendChild(desc);
+   
+    card.addEventListener('click', () => {
+        window.location.hash = `#card-${encodeURIComponent(name)}`;
+    });
+    
+
+    return card;
+}
+
+
+
+

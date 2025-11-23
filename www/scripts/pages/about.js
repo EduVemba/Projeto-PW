@@ -14,22 +14,23 @@ export function renderAboutPage(){
     const aboutContainer = document.createElement("div");
     aboutContainer.className = "about-container";
 
-    aboutContainer.appendChild(createCardAbout("João Freitas ","2024151451","Rugby e Programação"));
-    aboutContainer.appendChild(createCardAbout("Eduardo Vemba","202300364","Futebol e Programação"));
+     aboutContainer.appendChild(createCardAbout(
+        "João Freitas",
+        "2024151451",
+        "Rugby e Programação",
+        "https://www.instagram.com/j_diniss/?next=%2F", 
+        "mailto:2024151451@estudantes.ips.pt"        
+    ));
+
+    aboutContainer.appendChild(createCardAbout(
+        "Eduardo Vemba",
+        "202300364",
+        "Futebol e Programação",
+        "#", 
+        "mailto:202300364@estudantes.ips.pt"        
+    ));
+
     mainContent.appendChild(aboutContainer);
 
 }
 
-/**
- * @notice criação de cards para o about 
- * @param {*} name 
- * @returns 
- */
-  const cards = (name) => {
-
-    const card = document.createElement("div");
-    card.className = "about-card"
-    card.textContent = name;
-
-    return card;
-}

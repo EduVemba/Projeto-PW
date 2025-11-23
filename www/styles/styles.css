@@ -249,32 +249,35 @@ main:div {
 
 /*  SOBRE  */
 
+/* Container dos cartões */
 .about-container {
     display: flex;
-    justify-content: center; 
-    flex-wrap: wrap; 
-    gap: 30px; 
+    justify-content: center;      /* centraliza horizontalmente */
+    flex-wrap: wrap;              /* permite quebrar linha em telas pequenas */
+    gap: 30px;                    /* espaço entre os cartões */
     margin-top: 40px;
 }
 
+/* Cartão individual */
 .about-card {
     width: 250px;
-    height: 250px; 
+    height: 300px;                /* altura suficiente para conteúdo + ícones */
     padding: 20px;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.2);  /* efeito vidro */
     border: 2px solid #52b757;
     border-radius: 15px;
     backdrop-filter: blur(8px);
     color: #52b757;
     text-align: center;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    flex-direction: column;       /* empilha conteúdo verticalmente */
+    justify-content: space-between; /* empurra os ícones para baixo */
     align-items: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     gap: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* Círculo com iniciais */
 .card-initials {
     width: 60px;
     height: 60px;
@@ -288,33 +291,37 @@ main:div {
     font-weight: bold;
 }
 
+/* Parágrafos do cartão */
 .about-card p {
-    font-size: 25px;
+    font-size: 20px;
     margin: 0;
 }
 
+/* Container de ícones sociais */
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* Ícones de Font Awesome */
+.social-icons i {
+    font-size: 24px;
+    color: #52b757;
+    transition: transform 0.2s;
+}
+
+.social-icons i:hover {
+    transform: scale(1.2);
+}
+
+/* Hover do cartão */
 .about-card:hover {
     transform: translateY(-8px);
     box-shadow: 0 6px 14px rgba(0,0,0,0.25);
     cursor: pointer;
 }
 
-.card-icons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 10px;
-}
-
-.card-icon {
-    width: 24px;
-    height: 24px;
-    transition: transform 0.2s;
-}
-
-.card-icon:hover {
-    transform: scale(1.2);
-}
 
 
 

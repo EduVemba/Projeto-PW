@@ -27,6 +27,11 @@ export function createCardAbout(name,num,description){
     const card = document.createElement('div');
      card.classList.add('card','about-card');
 
+    const initialsDiv = document.createElement('div');
+    const initials = name.split(' ').map(n => n[0]).join('').toUpperCase();
+    initialsDiv.textContent = initials;
+    initialsDiv.classList.add('card-initials');
+    
     const cardName = document.createElement('p');
     cardName.textContent = name;
 
@@ -36,9 +41,12 @@ export function createCardAbout(name,num,description){
     const desc = document.createElement('p');
     desc.textContent = description;
 
+    card.appendChild(initialsDiv);
     card.appendChild(cardName);
     card.appendChild(number);
     card.appendChild(desc);
+    
+
    
     card.addEventListener('click', () => {
         window.location.hash = `#card-${encodeURIComponent(name)}`;

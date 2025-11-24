@@ -19,12 +19,12 @@ export function createHeader() {
     
     header.className = 'site-header';
     header.appendChild(title);
-    header.appendChild(createMenuButton('Géneros', '#orchids'));
-    header.appendChild(createMenuButton('Tipos', '#tipos'));
-    header.appendChild(createMenuButton('Luminosidades', '#luminosidades'));
-    header.appendChild(createMenuButton('Temperaturas', '#temperaturas'));
-    header.appendChild(createMenuButton('Humidades', '#humidades'));
-    header.appendChild(createMenuButton('Tamanhos', '#tamanhos'));
+    header.appendChild(createMenuButton('Géneros', '#genus'));
+    header.appendChild(createMenuButton('Tipos', '#type'));
+    header.appendChild(createMenuButton('Luminosidades', '#luminosity'));
+    header.appendChild(createMenuButton('Temperaturas', '#temperature'));
+    header.appendChild(createMenuButton('Humidades', '#humidity'));
+    header.appendChild(createMenuButton('Tamanhos', '#size'));
     header.appendChild(createMenuButton('Todas', '#todas'));
     header.appendChild(createMenuButton('Sobre','#about'));
 

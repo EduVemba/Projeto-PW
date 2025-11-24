@@ -1,7 +1,10 @@
 "use strict";
 
+import { scrollabeDiv } from "./scrollable.js";
+import { clearMainContent } from "../utils/windowUtils.js";
+
 //TODO: vai ir para a pagina de cada planta com uma lista que permite que possa ver elas individualmente
-export function createCard(name, path,content) {
+export function createCard(name, path,content, category = "", type = 0) {
     const card              = document.createElement('div');
     const cardName          = document.createElement('p')
     cardName.textContent    = name;
@@ -14,9 +17,21 @@ export function createCard(name, path,content) {
     card.appendChild(image);
     card.classList.add('card');
 
+    card.dataset.category = category;
+    card.dataset.type = type;
+
     
     card.addEventListener('click', () => {
+
+        const mainContent = document.querySelector('.main-content');
+
+        const cat = card.dataset.category || "";
+        const typ = Number(card.dataset.type || 0);
+
         window.location.hash = `#card-${encodeURIComponent(name)}`;
+
+        clearMainContent();
+        mainContent.appendChild(scrollabeDiv(name, cat, typ));
     });
     
 

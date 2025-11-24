@@ -4,9 +4,10 @@ import { orchidsCollection }    from "../state/orchidsInstance.js";
 import { createOrchidForm }     from "./formOrchids.js"
 import { orchidPage } from "./orchid.js";
 import { clearMainContent } from "../utils/windowUtils.js";
+import { filterBy } from "../utils/filter.js";
 
 
-export const scrollabeDiv = (header, type) => {
+export const scrollabeDiv = (header,category = "", type = 0) => {
     const page = document.createElement('div');
     page.classList.add('scrollable-container');
 
@@ -25,10 +26,14 @@ export const scrollabeDiv = (header, type) => {
         mainContent.appendChild(form);
     })
 
+    const orchids = header === "Todas"
+        ? orchidsCollection.getTodos
+        : filterBy(category, type);
+
     const inner = document.createElement('ul');
     
-    if (type === "TODOS") {
-        orchidsCollection.getTodos.forEach(orchid => {
+    
+        orchids.forEach(orchid => {
             const hr = document.createElement('hr');
             hr.className = "ul-hr"
 
@@ -50,6 +55,7 @@ export const scrollabeDiv = (header, type) => {
 
             const liMenu = document.createElement('span');
             liMenu.classList.add('orchid-menu');
+            //TODO associação com ID para remoção e edição
             liMenu.textContent = ":";
 
             li.appendChild(textSpan);
@@ -58,7 +64,7 @@ export const scrollabeDiv = (header, type) => {
             inner.appendChild(hr)
             inner.appendChild(li);
         });
-    }
+
 
     inner.classList.add('scrollable-content');
 

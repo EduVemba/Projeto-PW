@@ -45,22 +45,22 @@ const mainHeader = () => {
     }
 
     switch (location) {
-        case '#tipos':
+        case '#type':
             text.textContent = 'Tipos';
             break;
         case '#todas':
             text.textContent = 'Todas';
             break;
-        case '#luminosidades':
+        case '#luminosity':
             text.textContent = 'Luminosidades';
             break;
-        case '#temperaturas':
+        case '#temperature':
             text.textContent = 'Temperaturas';
             break;
-        case '#humidades':
+        case '#humidity':
             text.textContent = 'Humidades';
             break;
-        case '#tamanhos':
+        case '#size':
             text.textContent = 'Tamanhos';
             break;
         default:
@@ -97,88 +97,106 @@ export function updateMainContent() {
     const mainContent = document.querySelector('.main-content');
     const hash = getCurrentWindowLocation();
 
-    if (hash.startsWith("#card-")) {
-    const cardName = decodeURIComponent(hash.replace("#card-", ""));
-    let type = cardName === "Todas" ? "TODOS" : "";
-    const page = scrollabeDiv(cardName, type);
-    
     clearMainContent();
 
-    mainContent.appendChild(page);
-    return;
-}
+    // Mapa para hash #card-...
+    const filterMap = {
+        "Bulbophyllum": { category: "genus", type: 1 },
+        "Cattleya":     { category: "genus", type: 2 },
+        "Cymbidium":    { category: "genus", type: 3 },
+        "Paphiopedilum":{ category: "genus", type: 4 },
+        "Phalaenopsis": { category: "genus", type: 5 },
+        "Tipo Híbrido": { category: "type", type: 2 },
+        "Tipo Especie": { category: "type", type: 1 },
+        "Sombra Total": { category: "luminosity", type: 1 },
+        "Luz Sombreada":{ category: "luminosity", type: 2 },
+        "Luz Filtrada": { category: "luminosity", type: 3 },
+        "Luz Forte":    { category: "luminosity", type: 4 },
+        "Miniatura":    { category: "size", type: 1 },
+        "Pequeno":      { category: "size", type: 2 },
+        "Médio":        { category: "size", type: 3 },
+        "Grande":       { category: "size", type: 4 },
+        ">40%":         { category: "humidity", type: 1 },
+        "40-60%":       { category: "humidity", type: 2 },
+        "60-80%":       { category: "humidity", type: 3 },
+        "<80%":         { category: "humidity", type: 4 },
+        "Frio":         { category: "temperature", type: 1 },
+        "Temperado":    { category: "temperature", type: 2 },
+        "Quente":       { category: "temperature", type: 3 },
+        "Muito Quente": { category: "temperature", type: 4 },
+    };
 
 
+    if (hash.startsWith("#card-")) {
+        const cardName = decodeURIComponent(hash.replace("#card-", ""));
+        const { category = "", type = 0 } = filterMap[cardName] || {};
+        const page = scrollabeDiv(cardName, category, type);
+        mainContent.appendChild(page);
+        return;
+    }
+
+    // Para os outros hash (tipo #type, #genus, #luminosity...)
     const routes = {
-        "#tipos": () => [
-            createCard("Tipo Híbrido","characteristics", "type-hybrid"),
-            createCard("Tipo Especie","characteristics", "type-species")
+        "#type": () => [
+            createCard("Tipo Híbrido","characteristics", "type-hybrid","type",2),
+            createCard("Tipo Especie","characteristics", "type-species","type",1)
         ],
 
-        "#orchids": () => [
-            createCard("bulbophyllum","icons","bulbophyllum"),
-            createCard("cattleya","icons","cattleya"),
-            createCard("cymbidium","icons","cymbidium"),
-            createCard("paphiopedilum","icons","paphiopedilum"),
-            createCard("phalaenopsis","icons","phalaenopsis")
+        "#genus": () => [
+            createCard("Bulbophyllum","icons","Bulbophyllum","genus",1),
+            createCard("Cattleya","icons","Cattleya","genus",2),
+            createCard("Cymbidium","icons","Cymbidium","genus",3),
+            createCard("Paphiopedilum","icons","Paphiopedilum","genus",4),
+            createCard("Phalaenopsis","icons","Phalaenopsis","genus",5)
         ],
 
-        "#luminosidades": () => [
-            createCard("Sombra Total","characteristics", "luminosity-full-shade"),
-            createCard("Luz Sombreada","characteristics", "luminosity-shaded-light"),
-            createCard("Luz Filtrada","characteristics", "luminosity-filtered-light"),
-            createCard("Luz Forte","characteristics", "luminosity-strong-light")
+        "#luminosity": () => [
+            createCard("Sombra Total","characteristics", "luminosity-full-shade","luminosity",1),
+            createCard("Luz Sombreada","characteristics", "luminosity-shaded-light","luminosity",2),
+            createCard("Luz Filtrada","characteristics", "luminosity-filtered-light","luminosity",3),
+            createCard("Luz Forte","characteristics", "luminosity-strong-light","luminosity",4)
         ],
 
-        "#todas": () => scrollabeDiv("Todas","TODOS"),
+        "#todas": () => scrollabeDiv("Todas", "", 0),
 
-        "#tamanhos": () => [
-            createCard("Miniatura","characteristics", "size-miniature"),
-            createCard("Pequeno","characteristics", "size-small"),
-            createCard("Médio","characteristics", "size-medium"),
-            createCard("Grande","characteristics", "size-big")
+        "#size": () => [
+            createCard("Miniatura","characteristics", "size-miniature","size",1),
+            createCard("Pequeno","characteristics", "size-small", "size",2),
+            createCard("Médio","characteristics", "size-medium", "size",3),
+            createCard("Grande","characteristics", "size-big", "size",4)
         ],
 
-        "#humidades": () => [
-            createCard(">40%","characteristics", "humidity-lt40"),
-            createCard("40-60%","characteristics", "humidity-40-60"),
-            createCard("60-80%","characteristics", "humidity-60-80"),
-            createCard("<80%","characteristics", "humidity-gt80")
+        "#humidity": () => [
+            createCard(">40%","characteristics", "humidity-lt40", "humidity",1),
+            createCard("40-60%","characteristics", "humidity-40-60", "humidity",2),
+            createCard("60-80%","characteristics", "humidity-60-80", "humidity",3),
+            createCard("<80%","characteristics", "humidity-gt80", "humidity",4)
         ],
 
-        "#temperaturas": () => [
-            createCard("Frio","characteristics", "temperature-cold"),
-            createCard("Temperado","characteristics", "temperature-seasoned"),
-            createCard("Quente","characteristics", "temperature-hot"),
-            createCard("Muito Quente","characteristics", "temperature-very-hot"),
+        "#temperature": () => [
+            createCard("Frio","characteristics", "temperature-cold", "temperature",1),
+            createCard("Temperado","characteristics", "temperature-seasoned", "temperature",2),
+            createCard("Quente","characteristics", "temperature-hot", "temperature",3),
+            createCard("Muito Quente","characteristics", "temperature-very-hot", "temperature",4)
         ],
 
         "#about": () => renderAboutPage(),
-
     };
-
-    
-    clearMainContent();
 
     const renderer = routes[hash];
 
     if (renderer) {
-    const result = renderer();
-
-    if (result instanceof HTMLElement) {
-        mainContent.appendChild(result);
-    } else if (Array.isArray(result)) {
-        result.forEach(el => mainContent.appendChild(el));
-    } else if (typeof result === "string") {
-        mainContent.textContent = result;
+        const result = renderer();
+        if (result instanceof HTMLElement) {
+            mainContent.appendChild(result);
+        } else if (Array.isArray(result)) {
+            result.forEach(el => mainContent.appendChild(el));
+        } else if (typeof result === "string") {
+            mainContent.textContent = result;
+        }
     }
-    } else {
-        mainContent.textContent = "";
-    }
-
-    const mainEl = document.querySelector('main');
-    if (mainEl) mainEl.appendChild(mainContent);
 }
+
 
 window.addEventListener('hashchange', updateMainContent);
 

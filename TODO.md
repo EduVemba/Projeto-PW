@@ -1,16 +1,6 @@
 ### Tarefas:
-    - Exportar Data
-    - Criar Orquideas com a data logo no inicio do programa
-    - Fazer Scrollable container para a lista de orquideas 
-        EX:
-        ```html
-        <div class="box">
-            <!-- muito conteúdo -->
-        </div>
-        ``` 
-        ```css
-        .box {
-            max-height: 300px;   /* ou height fixa se quiseres */
-            overflow-y: auto;    /* scroll só dentro da div */
-         }
-        ```
+    - Tornar o Site responsivo
+    - Modal para delete e Edit
+    - Fazer a função que gera a pagina de editar e a função editar,
+    - Fazer com que na criação de nova orquidea se o nome ja estiver presente edita ao inves de criar um novo
+    - Função Delete

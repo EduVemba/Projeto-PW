@@ -204,6 +204,20 @@ main:div {
     gap: 20px;
 }
 
+.orchid-form label {
+    font-weight: bold;
+    color: #164918;
+}
+
+.orchid-form select {
+    border-radius: 5px;
+}
+
+
+.orchid-form input {
+    border-radius: 5px;
+}
+
 .form-footer {
     position: fixed;
     bottom: 10%;
@@ -323,8 +337,18 @@ main:div {
 }
 
 
+.form-footer button {
+    margin-left: 30px;
+    border-radius: 10px;
+    font-size: 25px;
+    transition: all 0.5s ease;
+    
+}
 
-
-
-
+.form-footer button:hover {
+    background-color: #50c754;
+    color: white;
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
 

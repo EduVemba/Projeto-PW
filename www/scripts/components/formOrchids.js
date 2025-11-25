@@ -101,8 +101,17 @@ export function createOrchidForm(){
     form.appendChild(createInput("Imagem (src):", "image_src", ""));
 
     const button = document.createElement("button");
-    button.textContent = "Criar Orquídea";
+    button.textContent = "Gravar";
     button.type = "submit";
+
+    const cancelButton = document.createElement("button");
+    cancelButton.textContent = "Cancelar";
+    cancelButton.type = "button";
+
+    cancelButton.addEventListener("click", () => {
+        history.back();
+    });
+
 
     form.addEventListener("submit", (event) => {
         event.preventDefault();
@@ -124,6 +133,7 @@ export function createOrchidForm(){
 
     const footer = createFooter("","form-footer");
     footer.appendChild(button);
+    footer.appendChild(cancelButton);
     form.appendChild(footer);
 
     formContainer.appendChild(form);

@@ -7,6 +7,8 @@ import { scrollabeDiv } from "./scrollable.js";
 import { clearMainContent } from "../utils/windowUtils.js";
 import { renderAboutPage } from "../pages/about.js";
 
+// programaçao funcional para switchs
+
 const getCurrentWindowLocation = () => window.location.hash;
 
 // Cria o header interno do main com base no hash atual

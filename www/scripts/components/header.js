@@ -16,7 +16,7 @@ export function createHeader() {
     
     title.appendChild(logo);
     title.appendChild(titleText);
-    
+    //TODO melhorar
     header.className = 'site-header';
     header.appendChild(title);
     header.appendChild(createMenuButton('Géneros', '#genus'));

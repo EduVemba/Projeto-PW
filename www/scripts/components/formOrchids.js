@@ -1,6 +1,7 @@
 import { orchidsCollection } from "../state/orchidsInstance.js";
 import { data } from "../data/data.js";
 import { createFooter } from "./footer.js";
+import { clearMainContent } from "../utils/windowUtils.js";
 
 //FIXME: quando pega um do mesmo nome tem que atualizar.
 function validateAndCreateOrchid(formData) {
@@ -128,4 +129,16 @@ export function createOrchidForm(){
     formContainer.appendChild(form);
 
     return formContainer;
+}
+
+const editOrhidForm = (orchid) =>  {}
+
+export const openEditOrchidForm = (id) => {
+    const orchid = orchidsCollection.findById(id);
+
+    const main = document.querySelector(".main-content");
+
+    clearMainContent();
+
+    main.appendChild(editOrhidForm(orchid));
 }

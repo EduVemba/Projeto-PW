@@ -79,4 +79,8 @@ export class OrchidsCollection {
             throw new Error("Orquídea não encontrada para apagar!");
         }
     }
+
+    findById(id) {
+        return this.#orchids.find(o => o.getId() === id);
+    }
 }

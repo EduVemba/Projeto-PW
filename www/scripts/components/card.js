@@ -3,7 +3,7 @@
 import { scrollabeDiv } from "./scrollable.js";
 import { clearMainContent } from "../utils/windowUtils.js";
 
-//TODO: vai ir para a pagina de cada planta com uma lista que permite que possa ver elas individualmente
+
 export function createCard(name, path,content, category = "", type = 0) {
     const card              = document.createElement('div');
     const cardName          = document.createElement('p')

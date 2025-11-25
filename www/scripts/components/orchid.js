@@ -1,7 +1,6 @@
 "use strict";
 
 
-//TODO: dependendo do tipo de informação as imagens mudam.
 export const orchidPage = (orchid) => {
     const orchidContent = document.createElement('div');
     orchidContent.className = "orchid-content"

@@ -38,7 +38,7 @@ export function createCard(name, path,content, category = "", type = 0) {
     return card;
 }
 
-export function createCardAbout(name,num,description, instagramUrl, outlookUrl){
+export function createCardAbout(name,num,description){
     const card = document.createElement('div');
      card.classList.add('card','about-card');
 
@@ -56,34 +56,11 @@ export function createCardAbout(name,num,description, instagramUrl, outlookUrl){
     const desc = document.createElement('p');
     desc.textContent = description;
 
-    const iconsDiv = document.createElement('div');
-    iconsDiv.classList.add('social-icons');
-
-    if(instagramUrl) {
-        const instaLink = document.createElement('a');
-        instaLink.href = instagramUrl;
-        instaLink.target = "_blank";
-        const instaIcon = document.createElement('i');
-        instaIcon.classList.add('fab', 'fa-instagram'); 
-        instaLink.appendChild(instaIcon);
-        iconsDiv.appendChild(instaLink);
-    }
-
-    if(outlookUrl) {
-        const outlookLink = document.createElement('a');
-        outlookLink.href = outlookUrl;
-        outlookLink.target = "_blank";
-        const outlookIcon = document.createElement('i');
-        outlookIcon.classList.add('fas', 'fa-envelope'); 
-        outlookLink.appendChild(outlookIcon);
-        iconsDiv.appendChild(outlookLink);
-    }
-
     card.appendChild(initialsDiv);
     card.appendChild(cardName);
     card.appendChild(number);
     card.appendChild(desc);
-    card.appendChild(iconsDiv);
+   
     
 
     return card;

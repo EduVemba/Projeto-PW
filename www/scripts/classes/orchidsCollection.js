@@ -29,7 +29,9 @@ export class OrchidsCollection {
 
 
     createOrchid(obj) {
-        const id = this.#orchids.length + 1;
+        //const id = this.#orchids.length + 1;
+        const maxId = Math.max(0, ...this.#orchids.map(o => o.getId()));
+        const id = maxId + 1;
         const orchid = new Orchid(
             id,
             obj.description,
@@ -72,12 +74,12 @@ export class OrchidsCollection {
     }
 
     deleteOrchid(id) {
-        const before    = this.#orchids.length;
-        this.#orchids   = this.#orchids.filter(o => o.getId() !== id);
-
-        if (this.#orchids.length === before) {
-            throw new Error("Orquídea não encontrada para apagar!");
+        const index = this.#orchids.findIndex(o => o.getId() === id);
+        if(index === -1){
+            throw new Error("Orquídea não encontrada!!!");
         }
+
+        this.#orchids.splice(index,1);
     }
 
     findById(id) {

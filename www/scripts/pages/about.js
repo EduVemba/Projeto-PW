@@ -17,17 +17,13 @@ export function renderAboutPage(){
      aboutContainer.appendChild(createCardAbout(
         "João Freitas",
         "2024151451",
-        "Rugby e Programação",
-        "https://www.instagram.com/j_diniss/?next=%2F", 
-        "mailto:2024151451@estudantes.ips.pt"        
+        "Rugby e Programação"       
     ));
 
     aboutContainer.appendChild(createCardAbout(
         "Eduardo Vemba",
         "202300364",
-        "Futebol e Programação",
-        "https://www.instagram.com/eduardovembaa/?next=%2F", 
-        "mailto:202300364@estudantes.ips.pt"        
+        "Futebol e Programação"        
     ));
 
     mainContent.appendChild(aboutContainer);

@@ -17,6 +17,9 @@ export const openModal = (id, target) => {
     editBtn.textContent  = "✎ Edit";
     deletBtn.textContent = "🗑 Delete";
 
+    editBtn.style.color  = "green";
+    deletBtn.style.color = "red";
+
     menu.appendChild(editBtn);
     menu.appendChild(deletBtn);
 

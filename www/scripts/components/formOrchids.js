@@ -124,7 +124,7 @@ export function createOrchidForm(){
 
             form.reset();
 
-            window.location.hash = "#card-Todas";
+            history.back();
 
         } catch (error) {
             alert("Erro: " + error.message);
@@ -141,14 +141,124 @@ export function createOrchidForm(){
     return formContainer;
 }
 
-const editOrhidForm = (orchid) =>  {}
+const editOrchidForm = (orchid, orchidsCollection) => {
+    if (!orchid) throw new Error("Orquídea não encontrada.");
 
-export const openEditOrchidForm = (id) => {
+    const formContainer = document.createElement('div');
+    formContainer.className = "form-container";
+
+    const form = document.createElement("form");
+    form.className = "orchid-form";
+
+    const title = document.createElement("h1");
+    title.textContent = "Editar Orquídea";
+    form.appendChild(title);
+
+    const createInput = (labelText, name, value = "") => {
+        const div = document.createElement("div");
+
+        const label = document.createElement("label");
+        label.textContent = labelText;
+        label.htmlFor = name;
+
+        const input = document.createElement("input");
+        input.type = "text";
+        input.name = name;
+        input.id = name;
+        input.value = value;
+
+        div.appendChild(label);
+        div.appendChild(input);
+        return div;
+    };
+
+    const createSelect = (labelText, name, options, selectedValue = null) => {
+        const div = document.createElement("div");
+
+        const label = document.createElement("label");
+        label.textContent = labelText;
+        label.htmlFor = name;
+
+        const select = document.createElement("select");
+        select.name = name;
+        select.id = name;
+
+        options.forEach(opt => {
+            const option = document.createElement("option");
+            option.value = opt.id;
+            option.textContent = opt.description;
+            if (opt.id === selectedValue) option.selected = true;
+            select.appendChild(option);
+        });
+
+        div.appendChild(label);
+        div.appendChild(select);
+        return div;
+    };
+
+    // Preenche com dados existentes
+    form.appendChild(createInput("Nome:", "description", orchid.getDescription()));
+    form.appendChild(createSelect("Género:", "genus", data.genus, orchid.getGenus()));
+    form.appendChild(createSelect("Tipo:", "type", data.type, orchid.getType()));
+    form.appendChild(createSelect("Luminosidade:", "luminosity", data.luminosity, orchid.getLuminosity()));
+    form.appendChild(createSelect("Temperatura:", "temperature", data.temperature, orchid.getTemperature()));
+    form.appendChild(createSelect("Humidade:", "humidity", data.humidity, orchid.getHumidity()));
+    form.appendChild(createSelect("Tamanho:", "size", data.size, orchid.getSize()));
+    form.appendChild(createInput("Imagem (src):", "image_src", orchid.getImageSrc()));
+
+    const button = document.createElement("button");
+    button.textContent = "Gravar";
+    button.type = "submit";
+
+    const cancelButton = document.createElement("button");
+    cancelButton.textContent = "Cancelar";
+    cancelButton.type = "button";
+
+    cancelButton.addEventListener("click", () => history.back());
+
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        try {
+            const formData = new FormData(form);
+
+            const updatedData = {
+                description: `${data.genus.find(g => g.id === Number(formData.get("genus")))?.description} ${(formData.get("description") || "").toString().trim()}`,
+                genus: Number(formData.get("genus")),
+                type: Number(formData.get("type")),
+                luminosity: Number(formData.get("luminosity")),
+                temperature: Number(formData.get("temperature")),
+                humidity: Number(formData.get("humidity")),
+                size: Number(formData.get("size")),
+                image_src: (formData.get("image_src") || "").toString().trim()
+            };
+
+            orchidsCollection.editOrchid(orchid.getId(), updatedData);
+            console.log("Orquídea atualizada com sucesso:", orchid);
+
+            window.location.hash = "#card-Todas";
+        } catch (error) {
+            alert("Erro: " + error.message);
+        }
+    });
+
+    const footer = createFooter("", "form-footer");
+    footer.appendChild(button);
+    footer.appendChild(cancelButton);
+    form.appendChild(footer);
+
+    formContainer.appendChild(form);
+
+    return formContainer;
+};
+
+
+export const openEditOrchidForm = (id, orchidsCollection) => {
     const orchid = orchidsCollection.findById(id);
 
     const main = document.querySelector(".main-content");
 
     clearMainContent();
 
-    main.appendChild(editOrhidForm(orchid));
+    main.appendChild(editOrchidForm(orchid, orchidsCollection));
 }

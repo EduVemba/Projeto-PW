@@ -58,8 +58,10 @@ export const scrollabeDiv = (header,category = "", type = 0) => {
 
             
             liMenu.addEventListener('click', (e) => {
-                const id = e.target.dataset.id;
-                openModal(id, e.target);  
+                e.stopPropagation();
+                const target = e.currentTarget;
+                const id = Number(target.dataset.id);
+                openModal(id, target);
             })
 
             li.appendChild(textSpan);

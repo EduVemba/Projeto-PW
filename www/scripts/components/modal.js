@@ -1,7 +1,7 @@
 "use strict";
 
+import { orchidsCollection } from "../state/orchidsInstance.js";
 //import { orchidsCollection } from "../state/orchidsInstance.js";
-// import { openOrchidEditForm } from "./formOrchids.js";
 
 export const openModal = (id, target) => {
     // Se já existir menu aberto, remove:
@@ -19,6 +19,13 @@ export const openModal = (id, target) => {
 
     editBtn.style.color  = "green";
     deletBtn.style.color = "red";
+
+    deletBtn.addEventListener("click", () => {
+        orchidsCollection.deleteOrchid(id);
+        menu.remove();
+        //TODO: atualizar a lista ao fazer a remoção
+        //window.location.reload
+    });
 
     menu.appendChild(editBtn);
     menu.appendChild(deletBtn);

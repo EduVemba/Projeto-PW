@@ -75,11 +75,10 @@ export class OrchidsCollection {
 
     deleteOrchid(id) {
         const index = this.#orchids.findIndex(o => o.getId() === id);
-        if(index === -1){
-            throw new Error("Orquídea não encontrada!!!");
-        }
+        if (index === -1) return false;
 
-        this.#orchids.splice(index,1);
+        this.#orchids.splice(index, 1);
+        return true;
     }
 
     findById(id) {

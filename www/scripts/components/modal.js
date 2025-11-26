@@ -1,9 +1,10 @@
 "use strict";
 
 import { orchidsCollection } from "../state/orchidsInstance.js";
+import { scrollabeDiv } from "./scrollable.js";
 //import { orchidsCollection } from "../state/orchidsInstance.js";
 
-export const openModal = (id, target) => {
+export const openModal = (id, target, headerGlobal, categoryGlobal, typeGlobal) => {
     // Se já existir menu aberto, remove:
     const oldMenu = document.querySelector(".orchid-context-menu");
     if (oldMenu) oldMenu.remove();
@@ -23,8 +24,8 @@ export const openModal = (id, target) => {
     deletBtn.addEventListener("click", () => {
         orchidsCollection.deleteOrchid(id);
         menu.remove();
-        //TODO: atualizar a lista ao fazer a remoção
-        //window.location.reload
+        const container = document.querySelector('.scrollable-container');
+        container.replaceWith(scrollabeDiv(headerGlobal, categoryGlobal, typeGlobal));
     });
 
     menu.appendChild(editBtn);

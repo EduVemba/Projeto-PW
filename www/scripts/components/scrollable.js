@@ -61,7 +61,7 @@ export const scrollabeDiv = (header,category = "", type = 0) => {
                 e.stopPropagation();
                 const target = e.currentTarget;
                 const id = Number(target.dataset.id);
-                openModal(id, target);
+                openModal(id, target, header, category, type);
             })
 
             li.appendChild(textSpan);

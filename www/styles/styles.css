@@ -504,10 +504,12 @@ main:div {
     cursor: pointer;
     font-size: 14px;
     width: 90%;
+    transition: all 0.3s ease;
 }
 
 .orchid-context-menu button:hover {
     background: #eee;
+    transition: all 0.3s ease;
 }
 
 

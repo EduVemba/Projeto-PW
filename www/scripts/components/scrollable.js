@@ -5,7 +5,7 @@ import { createOrchidForm }     from "./formOrchids.js"
 import { orchidPage } from "./orchid.js";
 import { clearMainContent } from "../utils/windowUtils.js";
 import { filterBy } from "../utils/filter.js";
-// import { openModal } from "./modal.js";
+import { openModal } from "./modal.js";
 
 
 export const scrollabeDiv = (header,category = "", type = 0) => {
@@ -33,7 +33,6 @@ export const scrollabeDiv = (header,category = "", type = 0) => {
 
     const inner = document.createElement('ul');
     
-    
         orchids.forEach(orchid => {
             const hr = document.createElement('hr');
             hr.className = "ul-hr"
@@ -55,13 +54,13 @@ export const scrollabeDiv = (header,category = "", type = 0) => {
             liMenu.classList.add('orchid-menu');
             //TODO associação com ID para remoção e edição
             liMenu.dataset.id = orchid.getId();
-            liMenu.textContent = ":";
+            liMenu.textContent = "⋮";
 
-            /*
+            
             liMenu.addEventListener('click', (e) => {
-                //const id = e.target.dataset.id;
-                //openModal(id);  
-            })*/
+                const id = e.target.dataset.id;
+                openModal(id, e.target);  
+            })
 
             li.appendChild(textSpan);
             li.appendChild(liMenu);

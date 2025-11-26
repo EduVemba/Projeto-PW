@@ -1,48 +1,37 @@
 "use strict";
 
-import { orchidsCollection } from "../state/orchidsInstance.js";
-import { openOrchidEditForm } from "./formOrchids.js";
+//import { orchidsCollection } from "../state/orchidsInstance.js";
+// import { openOrchidEditForm } from "./formOrchids.js";
 
-export const openModal = (id) => {
-    const modal = document.createElement('div');
-    modal.className = "list-modal";
+export const openModal = (id, target) => {
+    // Se já existir menu aberto, remove:
+    const oldMenu = document.querySelector(".orchid-context-menu");
+    if (oldMenu) oldMenu.remove();
 
-    const editBtn  = document.createElement('button');
-    const deletBtn = document.createElement('button');
+    const menu = document.createElement("div");
+    menu.className = "orchid-context-menu";
 
-    editBtn.className  = "modal-edit-btn";
-    deletBtn.className = "modal-delete-btn";
+    const editBtn  = document.createElement("button");
+    const deletBtn = document.createElement("button");
 
     editBtn.textContent  = "✎ Edit";
-    deletBtn.textContent = "🗑️ Delete";
+    deletBtn.textContent = "🗑 Delete";
 
-    editBtn.addEventListener('click', () => {
-        closeModal(modal);
-        openOrchidEditForm(Number(id));
-    });
+    menu.appendChild(editBtn);
+    menu.appendChild(deletBtn);
 
-    deletBtn.addEventListener('click', () => {
-        orchidsCollection.deleteOrchid(Number(id));
-        closeModal(modal);
-        reloadSidebar();
-    });
+    document.body.appendChild(menu);
 
-    modal.appendChild(editBtn);
-    modal.appendChild(deletBtn);
+    const rect = target.getBoundingClientRect();
+    menu.style.top  = `${rect.bottom + window.scrollY}px`;
+    menu.style.left = `${rect.left + window.scrollX}px`;
 
-    //TODO 
-    document.body.appendChild(modal);
-
-    modal.addEventListener("click", (e) => {
-        if (e.target === modal) closeModal(modal);
-    });
+    const close = (e) => {
+        if (!menu.contains(e.target)) {
+            menu.remove();
+            document.removeEventListener("click", close);
+        }
+    };
+    //FIXME: acho que não posso usar setTimeout
+    setTimeout(() => document.addEventListener("click", close), 0);
 };
-
-function closeModal(modal){
-    if (modal && modal.remove) modal.remove();
-}
-
-function reloadSidebar(){
-    const hash = window.location.hash.split("-")[1] || "Todas";
-    window.location.hash = `#card-${hash}`; 
-}

@@ -45,50 +45,6 @@ export function createOrchidForm(){
     title.textContent   = "Nova Orquídea";
     form.appendChild(title);
 
-    const createInput = (labelText, name, value = "") => {
-        const div = document.createElement("div");
-
-        const label         = document.createElement("label");
-        label.textContent   = labelText;
-        label.htmlFor       = name;
-
-        const input         = document.createElement("input");
-        input.type          = "text";
-        input.name          = name;
-        input.id            = name;
-        input.value         = value;
-
-        div.appendChild(label);
-        div.appendChild(input);
-        return div;
-    };
-
-    const createSelect = (labelText, name, options, selectedValue = null) => {
-        const div = document.createElement("div");
-
-        const label = document.createElement("label");
-        label.textContent = labelText;
-        label.htmlFor = name;
-
-        const select = document.createElement("select");
-        select.name = name;
-        select.id = name;
-
-        options.forEach(opt => {
-            const option = document.createElement("option");
-            option.value = opt.id;
-            option.textContent = opt.description;
-
-            if (opt.id === selectedValue) option.selected = true;
-
-            select.appendChild(option);
-        });
-
-        div.appendChild(label);
-        div.appendChild(select);
-        return div;
-    };
-
     form.appendChild(createInput("Nome:", "description", ""));
     
     form.appendChild(createSelect("Género:", "genus", data.genus, null));
@@ -153,48 +109,6 @@ const editOrchidForm = (orchid, orchidsCollection) => {
     const title = document.createElement("h1");
     title.textContent = "Editar Orquídea";
     form.appendChild(title);
-
-    const createInput = (labelText, name, value = "") => {
-        const div = document.createElement("div");
-
-        const label = document.createElement("label");
-        label.textContent = labelText;
-        label.htmlFor = name;
-
-        const input = document.createElement("input");
-        input.type = "text";
-        input.name = name;
-        input.id = name;
-        input.value = value;
-
-        div.appendChild(label);
-        div.appendChild(input);
-        return div;
-    };
-
-    const createSelect = (labelText, name, options, selectedValue = null) => {
-        const div = document.createElement("div");
-
-        const label = document.createElement("label");
-        label.textContent = labelText;
-        label.htmlFor = name;
-
-        const select = document.createElement("select");
-        select.name = name;
-        select.id = name;
-
-        options.forEach(opt => {
-            const option = document.createElement("option");
-            option.value = opt.id;
-            option.textContent = opt.description;
-            if (opt.id === selectedValue) option.selected = true;
-            select.appendChild(option);
-        });
-
-        div.appendChild(label);
-        div.appendChild(select);
-        return div;
-    };
 
     // Preenche com dados existentes
     form.appendChild(createInput("Nome:", "description", orchid.getDescription()));
@@ -262,3 +176,49 @@ export const openEditOrchidForm = (id, orchidsCollection) => {
 
     main.appendChild(editOrchidForm(orchid, orchidsCollection));
 }
+
+
+const createInput = (labelText, name, value = "") => {
+        const div = document.createElement("div");
+
+        const label         = document.createElement("label");
+        label.textContent   = labelText;
+        label.htmlFor       = name;
+
+        const input         = document.createElement("input");
+        input.type          = "text";
+        input.name          = name;
+        input.id            = name;
+        input.value         = value;
+
+        div.appendChild(label);
+        div.appendChild(input);
+        return div;
+};
+
+
+const createSelect = (labelText, name, options, selectedValue = null) => {
+        const div = document.createElement("div");
+
+        const label = document.createElement("label");
+        label.textContent = labelText;
+        label.htmlFor = name;
+
+        const select = document.createElement("select");
+        select.name = name;
+        select.id = name;
+
+        options.forEach(opt => {
+            const option = document.createElement("option");
+            option.value = opt.id;
+            option.textContent = opt.description;
+
+            if (opt.id === selectedValue) option.selected = true;
+
+            select.appendChild(option);
+        });
+
+        div.appendChild(label);
+        div.appendChild(select);
+        return div;
+};

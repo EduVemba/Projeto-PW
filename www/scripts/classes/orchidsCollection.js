@@ -84,4 +84,8 @@ export class OrchidsCollection {
     findById(id) {
         return this.#orchids.find(o => o.getId() === id);
     }
+
+    findByName(name){
+        return this.#orchids.find(o => o.getDescription().toLowerCase() === name.toLowerCase());
+    }
 }

@@ -52,7 +52,7 @@ export const scrollabeDiv = (header,category = "", type = 0) => {
 
             const liMenu = document.createElement('span');
             liMenu.classList.add('orchid-menu');
-            //TODO associação com ID para remoção e edição
+
             liMenu.dataset.id = orchid.getId();
             liMenu.textContent = "⋮";
 

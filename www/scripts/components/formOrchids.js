@@ -3,7 +3,6 @@ import { data } from "../data/data.js";
 import { createFooter } from "./footer.js";
 import { clearMainContent } from "../utils/windowUtils.js";
 
-//FIXME: quando pega um do mesmo nome tem que atualizar.
 function validateAndCreateOrchid(formData) {
     const genusId = Number(formData.get("genus"));
     const genusDescription = data.genus.find(g => g.id === genusId)?.description

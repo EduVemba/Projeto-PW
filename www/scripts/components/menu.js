@@ -7,7 +7,7 @@ export function setWindowContext(path) {
 export function createMenuButton(text, path) {
     const button = document.createElement('button');
     button.textContent = text;
-    button.className = 'menu-reference';
+    button.className = 'menu-item';
     button.addEventListener('click', () => setWindowContext(path));
     return button;
 }

@@ -3,9 +3,7 @@
 import { orchidsCollection } from "../state/orchidsInstance.js";
 import { scrollabeDiv } from "./scrollable.js";
 import { openEditOrchidForm } from "./formOrchids.js";
-//import { orchidsCollection } from "../state/orchidsInstance.js";
 
-//TODO: Tratar de codigo repetido.
 
 export const openModal = (id, target, headerGlobal, categoryGlobal, typeGlobal) => {
     // Se já existir menu aberto, remove:

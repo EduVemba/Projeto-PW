@@ -515,6 +515,8 @@ main:div {
 
 /* ============ MEDIA QUERIES ============ */
 
+/*TODO: quando for menor que 1400px de tamanho ativar o menu hamburger*/
+
 /* Tablets */
 @media (min-width: 768px) {
     .site-header {

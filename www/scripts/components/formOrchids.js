@@ -30,8 +30,14 @@ function validateAndCreateOrchid(formData) {
         image_src: (formData.get("image_src") || "").toString().trim()
     };
 
+    const existing = orchidsCollection.findByName(description);
+    if (existing) {
+        orchidsCollection.editOrchid(existing.getId(), novaOrquidea);
+        return { orchid: existing, isUpdate: true };
+    }
+
     const created = orchidsCollection.createOrchid(novaOrquidea);
-    return created;
+    return { orchid: created, isUpdate: false };
 }
 
 export function createOrchidForm(){

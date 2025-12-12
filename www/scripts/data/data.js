@@ -1,4 +1,237 @@
 "use strict";
+
+/**
+ * @notice Lista para fazer iteração e inserir orquideas na base de dados.
+ */
+/*
+const orchids = [
+                {
+                    description: "Bulbophyllum eberhardtii",
+                    genus: 1,
+                    type: 1,
+                    luminosity: 3,
+                    temperature: 4,
+                    humidity: 3,
+                    size: 4
+                },
+                {
+                    description: "Bulbophyllum echinolabium",
+                    genus: 1,
+                    type: 1,
+                    luminosity: 3,
+                    temperature: 3,
+                    humidity: 4,
+                    size: 4
+                },
+                {
+                    description: "Bulbophyllum frostii",
+                    genus: 1,
+                    type: 1,
+                    luminosity: 2,
+                    temperature: 3,
+                    humidity: 3,
+                    size: 1
+                },
+                {
+                    description: "Bulbophyllum Louis Sander",
+                    genus: 1,
+                    type: 2,
+                    luminosity: 2,
+                    temperature: 2,
+                    humidity: 4,
+                    size: 2
+                },
+                {
+                    description: "Bulbophyllum mastersianum",
+                    genus: 1,
+                    type: 1,
+                    luminosity: 1,
+                    temperature: 2,
+                    humidity: 3,
+                    size: 2
+                },
+                {
+                    description: "Cattleya Crystelle Smith",
+                    genus: 2,
+                    type: 2,
+                    luminosity: 3,
+                    temperature: 3,
+                    humidity: 2,
+                    size: 2
+                },
+                {
+                    description: "Cattleya Husky Boy",
+                    genus: 2,
+                    type: 2,
+                    luminosity: 4,
+                    temperature: 3,
+                    humidity: 2,
+                    size: 3
+                },
+                {
+                    description: "Cattleya labiata",
+                    genus: 2,
+                    type: 1,
+                    luminosity: 4,
+                    temperature: 3,
+                    humidity: 2,
+                    size: 3
+                },
+                {
+                    description: "Cattleya Ports of Paradise",
+                    genus: 2,
+                    type: 2,
+                    luminosity: 4,
+                    temperature: 3,
+                    humidity: 2,
+                    size: 4
+                },
+                {
+                    description: "Cattleya tigrina",
+                    genus: 2,
+                    type: 1,
+                    luminosity: 3,
+                    temperature: 3,
+                    humidity: 2,
+                    size: 4
+                },
+                {
+                    description: "Cymbidium Aiko Sama",
+                    genus: 3,
+                    type: 2,
+                    luminosity: 4,
+                    temperature: 2,
+                    humidity: 1,
+                    size: 4
+                },
+                {
+                    description: "Cymbidium Gold Cadillac",
+                    genus: 3,
+                    type: 2,
+                    luminosity: 4,
+                    temperature: 2,
+                    humidity: 1,
+                    size: 4
+                },
+                {
+                    description: "Cymbidium Peter Pan",
+                    genus: 3,
+                    type: 2,
+                    luminosity: 4,
+                    temperature: 2,
+                    humidity: 1,
+                    size: 4
+                },
+                {
+                    description: "Cymbidium Red Beauty",
+                    genus: 3,
+                    type: 2,
+                    luminosity: 4,
+                    temperature: 2,
+                    humidity: 1,
+                    size: 4
+                },
+                {
+                    description: "Cymbidium Vogel Magic",
+                    genus: 3,
+                    type: 2,
+                    luminosity: 4,
+                    temperature: 2,
+                    humidity: 1,
+                    size: 4
+                },
+                {
+                    description: "Paphiopedilum Americano",
+                    genus: 4,
+                    type: 2,
+                    luminosity: 3,
+                    temperature: 3,
+                    humidity: 2,
+                    size: 3
+                },
+                {
+                    description: "Paphiopedilum leucochilum",
+                    genus: 4,
+                    type: 1,
+                    luminosity: 2,
+                    temperature: 2,
+                    humidity: 4,
+                    size: 2
+                },
+                {
+                    description: "Paphiopedilum Maudiae Femma",
+                    genus: 4,
+                    type: 2,
+                    luminosity: 2,
+                    temperature: 2,
+                    humidity: 4,
+                    size: 3
+                },
+                {
+                    description: "Paphiopedilum Montagnard",
+                    genus: 4,
+                    type: 2,
+                    luminosity: 2,
+                    temperature: 2,
+                    humidity: 4,
+                    size: 3
+                },
+                {
+                    description: "Paphiopedilum spicerianum",
+                    genus: 4,
+                    type: 1,
+                    luminosity: 1,
+                    temperature: 2,
+                    humidity: 4,
+                    size: 2
+                },
+                {
+                    description: "Phalaenopsis Black Pearl",
+                    genus: 5,
+                    type: 2,
+                    luminosity: 2,
+                    temperature: 2,
+                    humidity: 3,
+                    size: 2
+                },
+                {
+                    description: "Phalaenopsis Liodoro",
+                    genus: 5,
+                    type: 2,
+                    luminosity: 2,
+                    temperature: 2,
+                    humidity: 3,
+                    size: 3
+                },
+                {
+                    description: "Phalaenopsis Manhattan Rose",
+                    genus: 5,
+                    type: 2,
+                    luminosity: 2,
+                    temperature: 2,
+                    humidity: 3,
+                    size: 4
+                },
+                {
+                    description: "Phalaenopsis Spoted Harlequin",
+                    genus: 5,
+                    type: 2,
+                    luminosity: 2,
+                    temperature: 2,
+                    humidity: 3,
+                    size: 3
+                },
+                {
+                    description: "Phalaenopsis Talin Gold",
+                    genus: 5,
+                    type: 2,
+                    luminosity: 2,
+                    temperature: 2,
+                    humidity: 3,
+                    size: 3
+                }
+            ]
+ */
 export let data = {
     genus: [
         { id: 1, description: "Bulbophyllum" },
@@ -36,6 +269,9 @@ export let data = {
         { id: 4, description: "Grande" }
     ],
     orchid: [
+        /**
+         * TODO: na Base de dados a criação de novas orquideas tera como src o proprio id da orquidea para a imagem
+         */
         {
             id: 1,
             description: "Bulbophyllum eberhardtii",
@@ -45,7 +281,7 @@ export let data = {
             temperature: 4,
             humidity: 3,
             size: 4,
-            src: "/www/images/orchids/bulbophyllum/bulbophyllum-eberhardtii.jpg"
+            src: "/www/images/orchids/bulbophyllum/1.jpg"
         },
         {
             id: 2,

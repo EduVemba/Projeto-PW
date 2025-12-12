@@ -1,4 +1,9 @@
 ### Tarefas:
-    - Atualizar o CreateOrchid - (se ja existe -> (nome  parecido)  atualizar).
-    - Tratar de codigo repetido
-    - fazer Dropdown menu para os media queries
+    - Melhorar o schema da Base de Dados
+    - Fazer Conexão a Base de Dados
+    - Fazer funções de chamada para a Base de Dados
+    - Fazer o servidor 
+    - Refactorizar o lado do cliente
+    - Adicionar Thumbnails
+    - MORE...
+    

@@ -1,0 +1,24 @@
+{
+  "name": "segunda-fase",
+  "version": "1.0.0",
+  "description": "```JSON\r {\r   \"mysqlOptions\": {\r     \"authProtocol\": \"default\",\r     \"enableSsl\": \"Disabled\"\r   },\r   \"ssh\": \"Disabled\",\r   \"previewLimit\": 50,\r   \"server\": \"localhost\",\r   \"port\": 3306,\r   \"driver\": \"MySQL\",\r   \"name\": \"PW_PROJECT\",\r   \"database\": \"orchids\",\r   \"username\": \"root\"\r }\r ```",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EduVemba/Projeto-PW.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/EduVemba/Projeto-PW/issues"
+  },
+  "homepage": "https://github.com/EduVemba/Projeto-PW#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}

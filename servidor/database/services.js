@@ -175,4 +175,4 @@ const OrchidType = {
 }
 
 
-export default new DatabaseServices();
+export  { DatabaseServices };

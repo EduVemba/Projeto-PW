@@ -2,7 +2,7 @@
 
 import { orchidsCollection } from "../state/orchidsInstance.js";
 
-
+//TODO: fazer um view que pega as propriedades como argumento e fazer um filter parecido como esse daqui
 export const filterBy = (category,type) => {
 
     const collection = orchidsCollection.getTodos;

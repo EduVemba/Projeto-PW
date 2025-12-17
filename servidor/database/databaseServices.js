@@ -165,4 +165,4 @@ const OrchidType = {
 }
 
 
-export  { DatabaseServices };
+module.exports = DatabaseServices ;

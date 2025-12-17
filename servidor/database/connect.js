@@ -20,6 +20,4 @@ async function execute(command, parameters = []) {
 }
 
 
-export { execute }
-
-module.exports.execute = execute;
+module.exports = execute;

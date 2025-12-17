@@ -1,6 +1,5 @@
 
-import { DatabaseServices } from "../database/databaseServices"
-import { VerifyOrchid } from "../utils/verification";
+const DatabaseServices = require("../database/databaseServices.js");
 
 class OrchidServices {
 
@@ -154,5 +153,15 @@ class OrchidServices {
 
 }
 
+/**
+* @brief função utilizado para verificar se o tipo a ser passado é da classe Orquidea
+* @param {Orchid} orchid 
+*/
+function VerifyOrchid (orchid) {
+    if (!(orchid instanceof Orchid)){
+        throw new Error('Valor invalido')
+    }
+}
 
-export {OrchidServices};
+
+module.exports = OrchidServices;

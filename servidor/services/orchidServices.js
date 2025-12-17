@@ -1,6 +1,6 @@
 
 import { DatabaseServices } from "../database/services"
-import { Orchid } from "../../www/scripts/classes/orchid";
+import { VerifyOrchid } from "../utils/verification";
 
 class OrchidServices {
 
@@ -10,33 +10,49 @@ class OrchidServices {
 
     //TODO implementar os metodos do service
     async addOrchid(orchid) {
-        this.#verifyOrchid(orchid);
+        VerifyOrchid(orchid);
+
     }
 
     async editOrchid(orchid) {
-        this.#verifyOrchid(orchid);
+        VerifyOrchid(orchid);
     }
 
     async removeOrchid(orchid) {
-        this.#verifyOrchid(orchid);
+        VerifyOrchid(orchid);
     }
 
-    async getOrchids() {}
+    async getOrchids() {
+        const result = await this.dbService.GetTODOS();
+        return result
+    }
 
-    async filterOrchids() {}
+    async filterOrchids(category, type) {
+
+        if (!Number.isInteger(type)) {
+            throw new Error('Invalid filter id');
+        }
+
+        const allowedCategories = [
+        'genus',
+        'type',
+        'luminosity',
+        'temperature',
+        'humidity',
+        'size'
+        ];
+
+        if (!allowedCategories.includes(category)) {
+            throw new Error('Invalid filter type');
+        }
+
+        const result = await this.dbService.GetFilteredContent(category,type)
+
+        return result;
+    }
 
     async fetchOrchid(orchid) {
-        this.#verifyOrchid(orchid);
-    }
-
-    /**
-     * @brief Método utilizado para verificar se o tipo a ser passado é da classe Orquidea
-     * @param {Orchid} orchid 
-     */
-    #verifyOrchid (orchid) {
-        if (!(orchid instanceof Orchid)){
-            throw new Error('Valor invalido')
-        }
+        VerifyOrchid(orchid);
     }
 
 }

@@ -1,6 +1,5 @@
 
-import { pool } from "./connect";
-import { Orchid } from "../../www/scripts/classes/orchid"
+const execute = require("./connect");
 
 
 /**
@@ -8,51 +7,23 @@ import { Orchid } from "../../www/scripts/classes/orchid"
  */
 class DatabaseServices {
 
-    constructor() {
-        this.pool = pool;
-    }
-
-
     async GetTODOS() {
-        const [result] = await this.pool.query(
+        const [result] = await execute(
             'SELECT * FROM orchid'
         );
 
         return result;
     }
 
-    async GetFilteredContent(type,type_id) {
+    async GetFilteredContent(category,type_id) {
 
-        const allowedTypes = [
-        'genus',
-        'type',
-        'luminosity',
-        'temperature',
-        'humidity',
-        'size'
-        ];
-
-        if (!Number.isInteger(type_id)) {
-            throw new Error('Invalid filter id');
-        }
-
-
-        if (!allowedTypes.includes(type)) {
-            throw new Error('Invalid filter type');
-        }
-
-
-        const [result] = await this.pool.query(
-        'CALL filter_content(?,?)',[type,type_id]
+        const [result] = await execute(
+        'CALL filter_content(?,?)',[category,type_id]
         )
         return result[0];
     }
 
     async AddOrchid(orchid) {
-
-        if (!(orchid instanceof Orchid)) {
-            throw new Error('O tipo é invalido.');
-        }
 
         const orchidType = OrchidType[orchid.getGenus()];
         if (!orchidType){
@@ -62,7 +33,7 @@ class DatabaseServices {
 
         const [
         result
-    ] = await this.pool.query(
+    ] = await execute(
         'CALL add_orchid(?,?,?,?,?,?,?,?)',
         [
             orchidType,
@@ -89,9 +60,6 @@ class DatabaseServices {
             throw new Error("ID inválido.");
         }
         
-        if (!(orchid instanceof Orchid)){
-            throw new Error("Tipo invalido.")
-        }
 
         const orchidType = OrchidType[orchid.getGenus()];
         if (!orchidType){
@@ -99,7 +67,7 @@ class DatabaseServices {
         }
 
 
-        const [result] = await this.pool.query(
+        const [result] = await execute(
             'CALL edit_orchid(?,?,?,?,?,?,?,?,?)',
             [
                 id,
@@ -123,7 +91,7 @@ class DatabaseServices {
             throw new Error("ID inválido.");
         }
 
-        const [result] = await this.pool.query(
+        const [result] = await execute(
             'DELETE FROM orchid WHERE id = ?',[id]
         )
 
@@ -137,17 +105,13 @@ class DatabaseServices {
 
     async GetOrchidID(orchid) {
 
-        if (!(orchid instanceof Orchid)){
-            throw new Error("Tipo invalido.")
-        }
-
         const orchidType = OrchidType[orchid.getGenus()];
         if (!orchidType){
             throw new Error("Genus inválido.")
         }
 
 
-        const [result] = await this.pool.query(
+        const [result] = await execute(
             'CALL findID(?,?,?,?,?,?,?,?)',
             [
                 orchidType,

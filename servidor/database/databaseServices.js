@@ -127,6 +127,32 @@ class DatabaseServices {
 
         return result[0][0]?.id ?? null;
     }
+
+    async GetByName(name) {
+
+        if (!name || !(name instanceof String)){
+            throw new Error('GetByName instrance Error')
+        }
+
+        const [result] = await execute(
+            'SELECT * FROM orchid WHERE description = ?', [name]
+        )
+
+        return result;
+    }
+
+    async GetById(id){
+
+         if (!Number.isInteger(id)) {
+            throw new Error("ID inválido.");
+        }
+
+        const [result] = await execute(
+            'DELETE FROM orchid WHERE id = ?',[id]
+        )
+
+        return result.affectedRows === 1;
+    }
 }
 
 

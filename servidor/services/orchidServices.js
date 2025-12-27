@@ -20,7 +20,7 @@ class OrchidServices {
         const exists = this.#orchidExists(orchid);
 
         if (exists){
-            const id = this.dbService.GetOrchidID(orchid);
+            const id = await this.dbService.GetOrchidID(orchid);
             const [result] = await this.dbService.EditOrchid(id,orchid);
             return result;
         }
@@ -141,10 +141,10 @@ class OrchidServices {
      */
     async #orchidExists(type) {
         if (typeof type === 'number'){
-            const [result] = this.dbService.GetById(type);
+            const [result] = await this.dbService.GetById(type);
             return result === null ? false : true;
         }else if(type instanceof String){
-            const [result] = this.dbService.GetByName(type);
+            const [result] = await this.dbService.GetByName(type);
             return result === null ? false : true;
         }else{
             throw new Error('Orchid search parameter wrong');
@@ -157,9 +157,24 @@ class OrchidServices {
 * @brief função utilizado para verificar se o tipo a ser passado é da classe Orquidea
 * @param {Orchid} orchid 
 */
-function VerifyOrchid (orchid) {
-    if (!(orchid instanceof Orchid)){
-        throw new Error('Valor invalido')
+function VerifyOrchid(orchid) {
+    const requiredFields = ['description', 'genus', 'type', 'luminosity', 'temperature', 'humidity', 'size'];
+    
+    for (const field of requiredFields) {
+        if (orchid[field] === undefined || orchid[field] === null) {
+            throw new Error(`Campo obrigatório '${field}' em falta`);
+        }
+    }
+    
+    if (typeof orchid.description !== 'string') {
+        throw new TypeError('description deve ser string');
+    }
+    
+    const numericFields = ['genus', 'type', 'luminosity', 'temperature', 'humidity', 'size'];
+    for (const field of numericFields) {
+        if (typeof orchid[field] !== 'number') {
+            throw new TypeError(`${field} deve ser número`);
+        }
     }
 }
 

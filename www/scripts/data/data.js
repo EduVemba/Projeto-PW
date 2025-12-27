@@ -292,7 +292,7 @@ export let data = {
             temperature: 3,
             humidity: 4,
             size: 4,
-            src: "/www/images/orchids/bulbophyllum/bulbophyllum-echinolabium.jpg"
+            src: "/www/images/orchids/bulbophyllum/2.jpg"
         },
         {
             id: 3,
@@ -303,7 +303,7 @@ export let data = {
             temperature: 3,
             humidity: 3,
             size: 1,
-            src: "/www/images/orchids/bulbophyllum/bulbophyllum-frostii.jpg"
+            src: "/www/images/orchids/bulbophyllum/3.jpg"
         },
         {
             id: 4,
@@ -314,7 +314,7 @@ export let data = {
             temperature: 2,
             humidity: 4,
             size: 2,
-            src: "/www/images/orchids/bulbophyllum/bulbophyllum-louis-sander.jpg"
+            src: "/www/images/orchids/bulbophyllum/4.jpg"
         },
         {
             id: 5,
@@ -325,7 +325,7 @@ export let data = {
             temperature: 2,
             humidity: 3,
             size: 2,
-            src: "/www/images/orchids/bulbophyllum/bulbophyllum-mastersianum.jpg"
+            src: "/www/images/orchids/bulbophyllum/5.jpg"
         },
         {
             id: 6,
@@ -336,7 +336,7 @@ export let data = {
             temperature: 3,
             humidity: 2,
             size: 2,
-            src: "/www/images/orchids/cattleya/cattleya-crystelle-smith.jpg"
+            src: "/www/images/orchids/cattleya/6.jpg"
         },
         {
             id: 7,
@@ -347,7 +347,7 @@ export let data = {
             temperature: 3,
             humidity: 2,
             size: 3,
-            src: "/www/images/orchids/cattleya/cattleya-husky-boy.jpg"
+            src: "/www/images/orchids/cattleya/7.jpg"
         },
         {
             id: 8,
@@ -358,7 +358,7 @@ export let data = {
             temperature: 3,
             humidity: 2,
             size: 3,
-            src: "/www/images/orchids/cattleya/cattleya-labiata.jpg"
+            src: "/www/images/orchids/cattleya/8.jpg"
         },
         {
             id: 9,
@@ -369,7 +369,7 @@ export let data = {
             temperature: 3,
             humidity: 2,
             size: 4,
-            src: "/www/images/orchids/cattleya/cattleya-ports-of-paradise.jpg"
+            src: "/www/images/orchids/cattleya/9.jpg"
         },
         {
             id: 10,
@@ -380,7 +380,7 @@ export let data = {
             temperature: 3,
             humidity: 2,
             size: 4,
-            src: "/www/images/orchids/cattleya/cattleya-tigrina.jpg"
+            src: "/www/images/orchids/cattleya/10.jpg"
         },
         {
             id: 11,
@@ -391,7 +391,7 @@ export let data = {
             temperature: 2,
             humidity: 1,
             size: 4,
-            src: "/www/images/orchids/cymbidium/cymbidium-aiko-sama.jpg"
+            src: "/www/images/orchids/cymbidium/11.jpg"
         },
         {
             id: 12,
@@ -402,7 +402,7 @@ export let data = {
             temperature: 2,
             humidity: 1,
             size: 4,
-            src: "/www/images/orchids/cymbidium/cymbidium-gold-cadillac.jpg"
+            src: "/www/images/orchids/cymbidium/12.jpg"
         },
         {
             id: 13,
@@ -413,7 +413,7 @@ export let data = {
             temperature: 2,
             humidity: 1,
             size: 4,
-            src: "/www/images/orchids/cymbidium/cymbidium-peter-pan.jpg"
+            src: "/www/images/orchids/cymbidium/13.jpg"
         },
         {
             id: 14,
@@ -424,7 +424,7 @@ export let data = {
             temperature: 2,
             humidity: 1,
             size: 4,
-            src: "/www/images/orchids/cymbidium/cymbidium-red-beauty.jpg"
+            src: "/www/images/orchids/cymbidium/14.jpg"
         },
         {
             id: 15,
@@ -435,7 +435,7 @@ export let data = {
             temperature: 2,
             humidity: 1,
             size: 4,
-            src: "/www/images/orchids/cymbidium/cymbidium-vogel-magic.jpg"
+            src: "/www/images/orchids/cymbidium/15.jpg"
         },
         {
             id: 16,
@@ -446,7 +446,7 @@ export let data = {
             temperature: 3,
             humidity: 2,
             size: 3,
-            src: "/www/images/orchids/paphiopedilum/paphiopedilum-americano.jpg"
+            src: "/www/images/orchids/paphiopedilum/16.jpg"
         },
         {
             id: 17,
@@ -457,7 +457,7 @@ export let data = {
             temperature: 2,
             humidity: 4,
             size: 2,
-            src: "/www/images/orchids/paphiopedilum/paphiopedilum-leucochilum.jpg"
+            src: "/www/images/orchids/paphiopedilum/17.jpg"
         },
         {
             id: 18,
@@ -468,7 +468,7 @@ export let data = {
             temperature: 2,
             humidity: 4,
             size: 3,
-            src: "/www/images/orchids/paphiopedilum/paphiopedilum-maudiae-femma.jpg"
+            src: "/www/images/orchids/paphiopedilum/18.jpg"
         },
         {
             id: 19,
@@ -479,7 +479,7 @@ export let data = {
             temperature: 2,
             humidity: 4,
             size: 3,
-            src: "/www/images/orchids/paphiopedilum/paphiopedilum-montagnard.jpg"
+            src: "/www/images/orchids/paphiopedilum/19.jpg"
         },
         {
             id: 20,
@@ -490,7 +490,7 @@ export let data = {
             temperature: 2,
             humidity: 4,
             size: 2,
-            src: "/www/images/orchids/paphiopedilum/paphiopedilum-spicerianum.jpg"
+            src: "/www/images/orchids/paphiopedilum/20.jpg"
         },
         {
             id: 21,
@@ -501,7 +501,7 @@ export let data = {
             temperature: 2,
             humidity: 3,
             size: 2,
-            src: "/www/images/orchids/phalaenopsis/phalaenopsis-black-pearl.jpg"
+            src: "/www/images/orchids/phalaenopsis/21.jpg"
         },
         {
             id: 22,
@@ -512,7 +512,7 @@ export let data = {
             temperature: 2,
             humidity: 3,
             size: 3,
-            src: "/www/images/orchids/phalaenopsis/phalaenopsis-liodoro.jpg"
+            src: "/www/images/orchids/phalaenopsis/22.jpg"
         },
         {
             id: 23,
@@ -523,7 +523,7 @@ export let data = {
             temperature: 2,
             humidity: 3,
             size: 4,
-            src: "/www/images/orchids/phalaenopsis/phalaenopsis-manhattan-rose.jpg"
+            src: "/www/images/orchids/phalaenopsis/23.jpg"
         },
         {
             id: 24,
@@ -534,7 +534,7 @@ export let data = {
             temperature: 2,
             humidity: 3,
             size: 3,
-            src: "/www/images/orchids/phalaenopsis/phalaenopsis-spoted-harlequin.jpg"
+            src: "/www/images/orchids/phalaenopsis/24.jpg"
         },
         {
             id: 25,
@@ -545,7 +545,7 @@ export let data = {
             temperature: 2,
             humidity: 3,
             size: 3,
-            src: "/www/images/orchids/phalaenopsis/phalaenopsis-talin-gold.jpg"
+            src: "/www/images/orchids/phalaenopsis/25.jpg"
         }
     ]
 };

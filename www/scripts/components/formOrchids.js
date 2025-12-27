@@ -59,7 +59,7 @@ export function createOrchidForm(){
     form.appendChild(createSelect("Humidade:", "humidity", data.humidity, null));
     form.appendChild(createSelect("Tamanho:", "size", data.size, null));
 
-    form.appendChild(createInput("Imagem (src):", "image_src", ""));
+    form.appendChild(createInput("Imagem (src):", "image_src", "","file"));
 
     const button = document.createElement("button");
     button.textContent = "Gravar";
@@ -123,7 +123,7 @@ const editOrchidForm = (orchid, orchidsCollection) => {
     form.appendChild(createSelect("Temperatura:", "temperature", data.temperature, orchid.getTemperature()));
     form.appendChild(createSelect("Humidade:", "humidity", data.humidity, orchid.getHumidity()));
     form.appendChild(createSelect("Tamanho:", "size", data.size, orchid.getSize()));
-    form.appendChild(createInput("Imagem (src):", "image_src", orchid.getImageSrc()));
+    form.appendChild(createInput("Imagem (src):", "image_src", "","file"));
 
     const button = document.createElement("button");
     button.textContent = "Gravar";
@@ -183,15 +183,17 @@ export const openEditOrchidForm = (id, orchidsCollection) => {
 }
 
 
-const createInput = (labelText, name, value = "") => {
+const createInput = (labelText, name, value = "", type = "") => {
         const div = document.createElement("div");
 
         const label         = document.createElement("label");
         label.textContent   = labelText;
         label.htmlFor       = name;
 
+        const tp = type || "text";
+
         const input         = document.createElement("input");
-        input.type          = "text";
+        input.type          = tp;
         input.name          = name;
         input.id            = name;
         input.value         = value;

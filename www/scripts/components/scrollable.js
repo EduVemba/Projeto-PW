@@ -3,7 +3,6 @@
 import { createOrchidForm }     from "./formOrchids.js"
 import { orchidPage } from "./orchid.js";
 import { clearMainContent } from "../utils/windowUtils.js";
-import { filterBy } from "../utils/filter.js";
 import { openModal } from "./modal.js";
 
 import { GetAllFetch, GetFilteredFetch } from "../handlers/filter.js";

@@ -20,7 +20,11 @@ class DatabaseServices {
             'CALL filter_content(?,?)',[category,type_id]
         );
 
-        return result[0];
+        if (!result) {
+            throw new Error('Database error during filter');
+        }
+
+        return result[0] || [];
     }
 
     async AddOrchid(orchid) {
@@ -94,11 +98,6 @@ class DatabaseServices {
         );
 
         return result.affectedRows === 1;
-    }
-
-    //TODO: rever sobre a imagem na Base de Dados.
-    async GetOrchidImage(id) {
-        //TODO: pegar imagem.
     }
 
     async GetOrchidID(orchid) {

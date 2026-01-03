@@ -13,6 +13,7 @@ async function execute(command, parameters = []) {
         //SELECT: [rows]
         //INSERT/UPDATE/DELETE: {affectedRows,changedRows,insertId,fieldCount,info,serverStatus,warningStatus}
     } catch (error) {
+        console.error(`[DB ERROR] ${command}`, error.message);
         return void 0;
     } finally {
         connection?.end();

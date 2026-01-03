@@ -1,9 +1,6 @@
 "use strict";
 
-import { scrollabeDiv } from "./scrollable.js";
-import { clearMainContent } from "../utils/windowUtils.js";
-
-//TODO: o fetch sera para filtragem sera com o category e type
+//FIXME: Temperatur, Humoidade, Não aparece nada.
 export function createCard(name, path,content, category = "", type = 0) {
     const card              = document.createElement('div');
     const cardName          = document.createElement('p')
@@ -20,19 +17,9 @@ export function createCard(name, path,content, category = "", type = 0) {
     card.dataset.category = category;
     card.dataset.type = type;
 
-    
-    card.addEventListener('click', async () => {
-
-        const mainContent = document.querySelector('.main-content');
-
-        const cat = card.dataset.category || "";
-        const typ = Number(card.dataset.type || 0);
-
+    // Just change the hash - let body.js handle the rendering
+    card.addEventListener('click', () => {
         window.location.hash = `#card-${encodeURIComponent(name)}`;
-
-        clearMainContent();
-        const scrollableContent = await scrollabeDiv(name, cat, typ);
-        mainContent.appendChild(scrollableContent);
     });
     
 

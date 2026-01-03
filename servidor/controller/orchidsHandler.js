@@ -22,7 +22,6 @@ class OrchidHandler {
                 data: orchids
             });
         }catch(error){
-            //TODO: Verificar o porque deu erro
             return res.status(500).json({
                 succes: false,
                 message: 'Erro na busca de todas as Orquideas',
@@ -113,13 +112,18 @@ class OrchidHandler {
             const { category, type } = req.query;
             const typeInt = parseInt(type);
             
+            console.log(`[FILTER] category=${category}, type=${typeInt}`);
+            
             const orchids = await this.orchServices.filterOrchids(category, typeInt);
+            
+            console.log(`[FILTER] Result:`, orchids);
             
             return res.status(200).json({
                 success: true,
                 data: orchids
             });
         }catch(error){
+            console.error(`[FILTER ERROR]`, error.message);
             return res.status(400).json({
                 success: false,
                 message: error.message

@@ -1,3 +1,5 @@
+drop database if exists orchids;
+
 create database orchids;
 
 use orchids;
@@ -19,6 +21,7 @@ CREATE TABLE types (
 
 CREATE TABLE attribute (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    number BIGINT NOT NULL,
     group_name ENUM('luminosity', 'temperature', 'humidity', 'size') NOT NULL,
     description VARCHAR(255) NOT NULL
 );

@@ -8,7 +8,7 @@ const execute = require("./connect");
 class DatabaseServices {
 
     async GetTODOS() {
-        const [result] = await execute(
+        const result = await execute(
             'SELECT * FROM orchid'
         );
 
@@ -16,10 +16,10 @@ class DatabaseServices {
     }
 
     async GetFilteredContent(category,type_id) {
+        const result = await execute(
+            'CALL filter_content(?,?)',[category,type_id]
+        );
 
-        const [result] = await execute(
-        'CALL filter_content(?,?)',[category,type_id]
-        )
         return result[0];
     }
 
@@ -31,21 +31,19 @@ class DatabaseServices {
         }
 
 
-        const [
-        result
-    ] = await execute(
-        'CALL add_orchid(?,?,?,?,?,?,?,?)',
-        [
-            orchidType,
-            orchid.getDescription(),
-            orchid.getGenus(),
-            orchid.getType(),
-            orchid.getLuminosity(),
-            orchid.getTemperature(),
-            orchid.getHumidity(),
-            orchid.getSize()
-        ]
-    );
+        const result = await execute(
+            'CALL add_orchid(?,?,?,?,?,?,?,?)',
+            [
+                orchidType,
+                orchid.getDescription(),
+                orchid.getGenus(),
+                orchid.getType(),
+                orchid.getLuminosity(),
+                orchid.getTemperature(),
+                orchid.getHumidity(),
+                orchid.getSize()
+            ]
+        );
 
     /*
     return {
@@ -67,7 +65,7 @@ class DatabaseServices {
         }
 
 
-        const [result] = await execute(
+        const result = await execute(
             'CALL edit_orchid(?,?,?,?,?,?,?,?,?)',
             [
                 id,
@@ -91,9 +89,9 @@ class DatabaseServices {
             throw new Error("ID inválido.");
         }
 
-        const [result] = await execute(
+        const result = await execute(
             'DELETE FROM orchid WHERE id = ?',[id]
-        )
+        );
 
         return result.affectedRows === 1;
     }
@@ -111,7 +109,7 @@ class DatabaseServices {
         }
 
 
-        const [result] = await execute(
+        const result = await execute(
             'CALL findID(?,?,?,?,?,?,?,?)',
             [
                 orchidType,
@@ -123,20 +121,20 @@ class DatabaseServices {
                 orchid.getHumidity(),
                 orchid.getSize()
             ]
-        )
+        );
 
         return result[0][0]?.id ?? null;
     }
 
     async GetByName(name) {
 
-        if (!name || !(name instanceof String)){
+        if (!name || typeof name !== 'string'){
             throw new Error('GetByName instrance Error')
         }
 
-        const [result] = await execute(
+        const result = await execute(
             'SELECT * FROM orchid WHERE description = ?', [name]
-        )
+        );
 
         return result;
     }
@@ -147,11 +145,11 @@ class DatabaseServices {
             throw new Error("ID inválido.");
         }
 
-        const [result] = await execute(
-            'DELETE FROM orchid WHERE id = ?',[id]
-        )
+        const result = await execute(
+            'SELECT * FROM orchid WHERE id = ?',[id]
+        );
 
-        return result.affectedRows === 1;
+        return result[0] ?? null;
     }
 }
 

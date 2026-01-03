@@ -21,7 +21,7 @@ export function createCard(name, path,content, category = "", type = 0) {
     card.dataset.type = type;
 
     
-    card.addEventListener('click', () => {
+    card.addEventListener('click', async () => {
 
         const mainContent = document.querySelector('.main-content');
 
@@ -31,7 +31,8 @@ export function createCard(name, path,content, category = "", type = 0) {
         window.location.hash = `#card-${encodeURIComponent(name)}`;
 
         clearMainContent();
-        mainContent.appendChild(scrollabeDiv(name, cat, typ));
+        const scrollableContent = await scrollabeDiv(name, cat, typ);
+        mainContent.appendChild(scrollableContent);
     });
     
 

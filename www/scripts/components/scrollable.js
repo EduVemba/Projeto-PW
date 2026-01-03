@@ -1,14 +1,14 @@
 "use strict";
 
-import { orchidsCollection }    from "../state/orchidsInstance.js";
 import { createOrchidForm }     from "./formOrchids.js"
 import { orchidPage } from "./orchid.js";
 import { clearMainContent } from "../utils/windowUtils.js";
 import { filterBy } from "../utils/filter.js";
 import { openModal } from "./modal.js";
 
+import { GetAllFetch, GetFilteredFetch } from "../handlers/filter.js";
 
-export const scrollabeDiv = (header,category = "", type = 0) => {
+export const scrollabeDiv = async (header,category = "", type = 0) => {
     const page = document.createElement('div');
     page.classList.add('scrollable-container');
 
@@ -28,12 +28,12 @@ export const scrollabeDiv = (header,category = "", type = 0) => {
     })
 
     const orchids = header === "Todas"
-        ? orchidsCollection.getTodos
-        : filterBy(category, type);
+        ? await GetAllFetch()
+        : await GetFilteredFetch(category, type);
 
     const inner = document.createElement('ul');
     
-        orchids.forEach(orchid => {
+        (orchids || []).forEach(orchid => {
             const hr = document.createElement('hr');
             hr.className = "ul-hr"
 

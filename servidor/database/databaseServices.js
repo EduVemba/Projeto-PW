@@ -29,7 +29,7 @@ class DatabaseServices {
 
     async AddOrchid(orchid) {
 
-        const orchidType = OrchidType[orchid.getGenus()];
+        const orchidType = OrchidType[orchid.genus];
         if (!orchidType){
             throw new Error("Genus inválido.")
         }
@@ -39,13 +39,13 @@ class DatabaseServices {
             'CALL add_orchid(?,?,?,?,?,?,?,?)',
             [
                 orchidType,
-                orchid.getDescription(),
-                orchid.getGenus(),
-                orchid.getType(),
-                orchid.getLuminosity(),
-                orchid.getTemperature(),
-                orchid.getHumidity(),
-                orchid.getSize()
+                orchid.description,
+                orchid.genus,
+                orchid.type,
+                orchid.luminosity,
+                orchid.temperature,
+                orchid.humidity,
+                orchid.size
             ]
         );
 
@@ -63,7 +63,7 @@ class DatabaseServices {
         }
         
 
-        const orchidType = OrchidType[orchid.getGenus()];
+        const orchidType = OrchidType[orchid.genus];
         if (!orchidType){
             throw new Error("Genus inválido.")
         }
@@ -74,13 +74,13 @@ class DatabaseServices {
             [
                 id,
                 orchidType,
-                orchid.getDescription(),
-                orchid.getGenus(),
-                orchid.getType(),
-                orchid.getLuminosity(),
-                orchid.getTemperature(),
-                orchid.getHumidity(),
-                orchid.getSize()
+                orchid.description,
+                orchid.genus,
+                orchid.type,
+                orchid.luminosity,
+                orchid.temperature,
+                orchid.humidity,
+                orchid.size
             ]
         );
 
@@ -102,7 +102,7 @@ class DatabaseServices {
 
     async GetOrchidID(orchid) {
 
-        const orchidType = OrchidType[orchid.getGenus()];
+        const orchidType = OrchidType[orchid.genus];
         if (!orchidType){
             throw new Error("Genus inválido.")
         }
@@ -112,13 +112,13 @@ class DatabaseServices {
             'CALL findID(?,?,?,?,?,?,?,?)',
             [
                 orchidType,
-                orchid.getDescription(),
-                orchid.getGenus(),
-                orchid.getType(),
-                orchid.getLuminosity(),
-                orchid.getTemperature(),
-                orchid.getHumidity(),
-                orchid.getSize()
+                orchid.description,
+                orchid.genus,
+                orchid.type,
+                orchid.luminosity,
+                orchid.temperature,
+                orchid.humidity,
+                orchid.size
             ]
         );
 

@@ -17,11 +17,11 @@ class OrchidServices {
         VerifyOrchid(orchid);
 
 
-        const exists = this.#orchidExists(orchid);
+        const id = await this.dbService.GetOrchidID(orchid);
+        const exists = id !== null;
 
         if (exists){
-            const id = await this.dbService.GetOrchidID(orchid);
-            const [result] = await this.dbService.EditOrchid(id,orchid);
+            const result = await this.dbService.EditOrchid(id, orchid);
             return result;
         }
 

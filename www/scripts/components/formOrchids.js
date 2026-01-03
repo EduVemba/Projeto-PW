@@ -2,6 +2,7 @@ import { orchidsCollection } from "../state/orchidsInstance.js";
 import { data } from "../data/data.js";
 import { createFooter } from "./footer.js";
 import { clearMainContent } from "../utils/windowUtils.js";
+import { CreateOrchidFetch } from "../handlers/create.js";
 
 function validateAndCreateOrchid(formData) {
     const genusId = Number(formData.get("genus"));
@@ -29,14 +30,7 @@ function validateAndCreateOrchid(formData) {
         image_src: (formData.get("image_src") || "").toString().trim()
     };
 
-    const existing = orchidsCollection.findByName(description);
-    if (existing) {
-        orchidsCollection.editOrchid(existing.getId(), novaOrquidea);
-        return { orchid: existing, isUpdate: true };
-    }
-
-    const created = orchidsCollection.createOrchid(novaOrquidea);
-    return { orchid: created, isUpdate: false };
+    return novaOrquidea;
 }
 
 export function createOrchidForm(){
@@ -79,13 +73,16 @@ export function createOrchidForm(){
 
         try {
             const formData = new FormData(form);
-            const created = validateAndCreateOrchid(formData);
+            const orchidData = validateAndCreateOrchid(formData);
             
-            console.log("Orquídea criada com sucesso:", created);
-
-            form.reset();
-
-            history.back();
+            // Call the server to create the orchid
+            CreateOrchidFetch(orchidData).then(result => {
+                console.log("Orquídea criada com sucesso:", result);
+                form.reset();
+                history.back();
+            }).catch(error => {
+                alert("Erro ao criar orquídea: " + error.message);
+            });
 
         } catch (error) {
             alert("Erro: " + error.message);

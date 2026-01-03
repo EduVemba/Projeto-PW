@@ -3,6 +3,7 @@
 import { orchidsCollection } from "../state/orchidsInstance.js";
 import { scrollabeDiv } from "./scrollable.js";
 import { openEditOrchidForm } from "./formOrchids.js";
+import { DeleteOrchidFetch } from "../handlers/edit.js";
 
 
 export const openModal = (id, target, headerGlobal, categoryGlobal, typeGlobal) => {
@@ -22,11 +23,16 @@ export const openModal = (id, target, headerGlobal, categoryGlobal, typeGlobal) 
     editBtn.style.color  = "green";
     deletBtn.style.color = "red";
 
-    deletBtn.addEventListener("click", () => {
-        orchidsCollection.deleteOrchid(id);
-        menu.remove();
-        const container = document.querySelector('.scrollable-container');
-        container.replaceWith(scrollabeDiv(headerGlobal, categoryGlobal, typeGlobal));
+    deletBtn.addEventListener("click", async () => {
+        try {
+            await DeleteOrchidFetch(id);
+            menu.remove();
+            const container = document.querySelector('.scrollable-container');
+            const newContainer = await scrollabeDiv(headerGlobal, categoryGlobal, typeGlobal);
+            container.replaceWith(newContainer);
+        } catch (error) {
+            alert("Erro ao deletar: " + error.message);
+        }
     });
 
     editBtn.addEventListener("click", () => {

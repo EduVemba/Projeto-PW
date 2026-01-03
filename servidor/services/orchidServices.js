@@ -71,7 +71,7 @@ class OrchidServices {
             throw new Error('Orquídea não encontrada');
         }
 
-        const result = await this.dbService.DeleteOrchid(id);
+        const result = await this.dbService.RemoveOrchid(id);
         return result;
     }
 

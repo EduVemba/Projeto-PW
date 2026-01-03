@@ -3,6 +3,7 @@ import { data } from "../data/data.js";
 import { createFooter } from "./footer.js";
 import { clearMainContent } from "../utils/windowUtils.js";
 import { CreateOrchidFetch } from "../handlers/create.js";
+import { EditOrchidFetch } from "../handlers/edit.js";
 
 function validateAndCreateOrchid(formData) {
     const genusId = Number(formData.get("genus"));
@@ -33,6 +34,7 @@ function validateAndCreateOrchid(formData) {
     return novaOrquidea;
 }
 
+//TODO: utilizar o metodo para input de imagem.
 export function createOrchidForm(){
     const formContainer     = document.createElement('div');
     formContainer.className = "form-container";
@@ -149,10 +151,12 @@ const editOrchidForm = (orchid, orchidsCollection) => {
                 image_src: (formData.get("image_src") || "").toString().trim()
             };
 
-            orchidsCollection.editOrchid(orchid.getId(), updatedData);
-            console.log("Orquídea atualizada com sucesso:", orchid);
-
-            window.location.hash = "#card-Todas";
+            EditOrchidFetch(orchid.getId(), updatedData).then(result => {
+                console.log("Orquídea atualizada com sucesso:", result);
+                window.location.hash = "#card-Todas";
+            }).catch(error => {
+                alert("Erro ao editar orquídea: " + error.message);
+            });
         } catch (error) {
             alert("Erro: " + error.message);
         }

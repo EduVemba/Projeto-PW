@@ -70,7 +70,7 @@ class DatabaseServices {
 
 
         const result = await execute(
-            'CALL edit_orchid(?,?,?,?,?,?,?,?,?)',
+            'CALL update_orchid(?,?,?,?,?,?,?,?,?)',
             [
                 id,
                 orchidType,
@@ -84,7 +84,7 @@ class DatabaseServices {
             ]
         );
 
-        return result.affectedRows === 1;
+        return (result && result[1]) ? result[1].affectedRows === 1 : false;
     }
 
     async RemoveOrchid(id) {

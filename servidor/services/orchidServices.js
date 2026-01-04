@@ -141,10 +141,10 @@ class OrchidServices {
      */
     async #orchidExists(type) {
         if (typeof type === 'number'){
-            const [result] = await this.dbService.GetById(type);
+            const result = await this.dbService.GetById(type);
             return result === null ? false : true;
         }else if(type instanceof String){
-            const [result] = await this.dbService.GetByName(type);
+            const result = await this.dbService.GetByName(type);
             return result === null ? false : true;
         }else{
             throw new Error('Orchid search parameter wrong');

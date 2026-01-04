@@ -115,7 +115,8 @@ const editOrchidForm = (orchid, orchidsCollection) => {
     form.appendChild(title);
 
     // Preenche com dados existentes
-    form.appendChild(createInput("Nome:", "description", orchid.getDescription()));
+    const descriptionParts = orchid.getDescription().split(' ').slice(1).join(' ');
+    form.appendChild(createInput("Nome:", "description", descriptionParts));
     form.appendChild(createSelect("Género:", "genus", data.genus, orchid.getGenus()));
     form.appendChild(createSelect("Tipo:", "type", data.type, orchid.getType()));
     form.appendChild(createSelect("Luminosidade:", "luminosity", data.luminosity, orchid.getLuminosity()));
@@ -152,8 +153,8 @@ const editOrchidForm = (orchid, orchidsCollection) => {
             };
 
             EditOrchidFetch(orchid.getId(), updatedData).then(result => {
-                console.log("Orquídea atualizada com sucesso:", result);
-                window.location.hash = "#card-Todas";
+                form.reset();
+                history.back();
             }).catch(error => {
                 alert("Erro ao editar orquídea: " + error.message);
             });

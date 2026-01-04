@@ -41,4 +41,4 @@ function GetThumbnail(genus, id, size = 50) {
     return img;
 }
 
-export { GetImage, GetImageUrl, GetThumbnail };
+export { GetImage, GetThumbnail };

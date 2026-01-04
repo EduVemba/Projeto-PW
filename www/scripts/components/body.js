@@ -203,7 +203,11 @@ export function updateMainContent() {
                     mainContent.textContent = result;
                 }
             }
-        } finally {
+        } catch (error) {
+            console.error("Erro ao renderizar conteúdo:", error);
+            mainContent.textContent = `Ocorreu um erro ao carregar o conteúdo: ${error.message}. Verifique se o servidor está em execução.`;
+        }
+        finally {
             isRendering = false; // Marcar renderização como concluída
         }
     })();

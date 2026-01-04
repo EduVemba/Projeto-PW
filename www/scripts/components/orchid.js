@@ -1,5 +1,7 @@
 "use strict";
 
+import { GetImage } from "../utils/image.js";
+
 
 export const orchidPage = (orchid) => {
     const orchidContent = document.createElement('div');
@@ -7,8 +9,7 @@ export const orchidPage = (orchid) => {
 
     const orchidInfo = getOrchidInfo(orchid);
 
-    const image = document.createElement('img');
-    image.src = orchidInfo.img;
+    const image = GetImage(orchid.getGenus(), orchid.getId());
     image.className = "orchid-main-image";
 
     const information = document.createElement('div');

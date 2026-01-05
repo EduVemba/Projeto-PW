@@ -38,4 +38,17 @@ async function GetOrchidByIdFetch(id) {
     );
 }
 
-export { GetOrchidByIdFetch };
+async function GetOptionsFromAPI() {
+    const res = await fetch(`http://localhost:3000/orquideas/options`, {
+        method: 'GET'
+    });
+
+    if (!res.ok) {
+        throw new Error(`Erro ao obter opções: ${res.status}`);
+    }
+
+    const json = await res.json();
+    return json.data ?? json;
+}
+
+export { GetOrchidByIdFetch, GetOptionsFromAPI };

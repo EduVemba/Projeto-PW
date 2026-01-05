@@ -1,6 +1,5 @@
 "use strict";
 
-import { orchidsCollection } from "../state/orchidsInstance.js";
 import { scrollabeDiv } from "./scrollable.js";
 import { openEditOrchidForm } from "./formOrchids.js";
 import { DeleteOrchidFetch } from "../handlers/edit.js";

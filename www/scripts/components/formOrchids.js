@@ -1,14 +1,13 @@
-import { data } from "../data/data.js";
 import { createFooter } from "./footer.js";
 import { clearMainContent } from "../utils/windowUtils.js";
 import { CreateOrchidFetch } from "../handlers/create.js";
 import { EditOrchidFetch } from "../handlers/edit.js";
-import { GetOrchidByIdFetch } from "../handlers/get.js";
-import { Orchid } from "../classes/orchid.js";
+import { GetOrchidByIdFetch, GetOptionsFromAPI } from "../handlers/get.js";
 
-function validateAndCreateOrchid(formData) {
+async function validateAndCreateOrchid(formData) {
+    const options = await GetOptionsFromAPI();
     const genusId = Number(formData.get("genus"));
-    const genusDescription = data.genus.find(g => g.id === genusId)?.description
+    const genusDescription = options.genus.find(g => g.id === genusId)?.description
     
     const description = `${genusDescription} ${(formData.get("description") || "").toString().trim()}`;
     if (!description) throw new Error("Nome (description) é obrigatório.");
@@ -36,7 +35,7 @@ function validateAndCreateOrchid(formData) {
 }
 
 //TODO: utilizar o metodo para input de imagem.
-export function createOrchidForm(){
+export async function createOrchidForm(){
     const formContainer     = document.createElement('div');
     formContainer.className = "form-container";
 
@@ -47,14 +46,16 @@ export function createOrchidForm(){
     title.textContent   = "Nova Orquídea";
     form.appendChild(title);
 
+    const options = await GetOptionsFromAPI();
+
     form.appendChild(createInput("Nome:", "description", ""));
     
-    form.appendChild(createSelect("Género:", "genus", data.genus, null));
-    form.appendChild(createSelect("Tipo:", "type", data.type, null));
-    form.appendChild(createSelect("Luminosidade:", "luminosity", data.luminosity, null));
-    form.appendChild(createSelect("Temperatura:", "temperature", data.temperature, null));
-    form.appendChild(createSelect("Humidade:", "humidity", data.humidity, null));
-    form.appendChild(createSelect("Tamanho:", "size", data.size, null));
+    form.appendChild(createSelect("Género:", "genus", options.genus, null));
+    form.appendChild(createSelect("Tipo:", "type", options.type, null));
+    form.appendChild(createSelect("Luminosidade:", "luminosity", options.luminosity, null));
+    form.appendChild(createSelect("Temperatura:", "temperature", options.temperature, null));
+    form.appendChild(createSelect("Humidade:", "humidity", options.humidity, null));
+    form.appendChild(createSelect("Tamanho:", "size", options.size, null));
 
     form.appendChild(createInput("Imagem (src):", "image_src", "","file"));
 
@@ -71,12 +72,12 @@ export function createOrchidForm(){
     });
 
 
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
         event.preventDefault();
 
         try {
             const formData = new FormData(form);
-            const orchidData = validateAndCreateOrchid(formData);
+            const orchidData = await validateAndCreateOrchid(formData);
             
             // Call the server to create the orchid
             CreateOrchidFetch(orchidData).then(result => {
@@ -102,8 +103,7 @@ export function createOrchidForm(){
     return formContainer;
 }
 
-const editOrchidForm = (orchid) => {
-    if (!orchid) throw new Error("Orquídea não encontrada.");
+const editOrchidForm = async (id) => {
 
     const formContainer = document.createElement('div');
     formContainer.className = "form-container";
@@ -115,16 +115,21 @@ const editOrchidForm = (orchid) => {
     title.textContent = "Editar Orquídea";
     form.appendChild(title);
 
+    const orchid = await GetOrchidByIdFetch(id);
+
+    const options = await GetOptionsFromAPI();
+
     // Preenche com dados existentes
     const descriptionParts = orchid.getDescription().split(' ').slice(1).join(' ');
+    
     form.appendChild(createInput("Nome:", "description", descriptionParts));
-    form.appendChild(createSelect("Género:", "genus", data.genus, orchid.getGenus()));
-    form.appendChild(createSelect("Tipo:", "type", data.type, orchid.getType()));
-    form.appendChild(createSelect("Luminosidade:", "luminosity", data.luminosity, orchid.getLuminosity()));
-    form.appendChild(createSelect("Temperatura:", "temperature", data.temperature, orchid.getTemperature()));
-    form.appendChild(createSelect("Humidade:", "humidity", data.humidity, orchid.getHumidity()));
-    form.appendChild(createSelect("Tamanho:", "size", data.size, orchid.getSize()));
-    form.appendChild(createInput("Imagem (src):", "image_src", "","file"));
+    form.appendChild(createSelect("Género:", "genus", options.genus, orchid.getGenus()));
+    form.appendChild(createSelect("Tipo:", "type", options.type, orchid.getType()));
+    form.appendChild(createSelect("Luminosidade:", "luminosity", options.luminosity, orchid.getLuminosity()));
+    form.appendChild(createSelect("Temperatura:", "temperature", options.temperature, orchid.getTemperature()));
+    form.appendChild(createSelect("Humidade:", "humidity", options.humidity, orchid.getHumidity()));
+    form.appendChild(createSelect("Tamanho:", "size", options.size, orchid.getSize()));
+    form.appendChild(createInput("Imagem (src):", "image_src", "", "file"));
 
     const button = document.createElement("button");
     button.textContent = "Gravar";
@@ -143,7 +148,7 @@ const editOrchidForm = (orchid) => {
             const formData = new FormData(form);
 
             const updatedData = {
-                description: `${data.genus.find(g => g.id === Number(formData.get("genus")))?.description} ${(formData.get("description") || "").toString().trim()}`,
+                description: `${options.genus.find(g => g.id === Number(formData.get("genus")))?.description} ${(formData.get("description") || "").toString().trim()}`,
                 genus: Number(formData.get("genus")),
                 type: Number(formData.get("type")),
                 luminosity: Number(formData.get("luminosity")),
@@ -178,13 +183,13 @@ const editOrchidForm = (orchid) => {
 // Ao inves de procurar no collection procura na BD
 export const openEditOrchidForm = async (id) => {
     try {
-        const orchid = await GetOrchidByIdFetch(id);
-
         const main = document.querySelector(".main-content");
 
         clearMainContent();
 
-        main.appendChild(editOrchidForm(orchid));
+        const editForm = await editOrchidForm(id);
+
+        main.appendChild(editForm);
     } catch (error) {
         alert(`Erro ao carregar os dados da orquídea para edição: ${error.message}`);
     }

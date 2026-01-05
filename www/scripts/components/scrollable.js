@@ -18,8 +18,8 @@ export const scrollabeDiv = async (header,category = "", type = 0) => {
 
     const mainContent = document.querySelector('.main-content')
 
-    createBtn.addEventListener('click', () => {
-        const form = createOrchidForm();
+    createBtn.addEventListener('click', async () => {
+        const form = await createOrchidForm();
                 
         clearMainContent();
 

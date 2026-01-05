@@ -35,8 +35,8 @@ export const openModal = (id, target, headerGlobal, categoryGlobal, typeGlobal) 
         }
     });
 
-    editBtn.addEventListener("click", () => {
-        openEditOrchidForm(id, orchidsCollection);
+    editBtn.addEventListener("click", async () => {
+        await openEditOrchidForm(id);
         menu.remove();
     });
 

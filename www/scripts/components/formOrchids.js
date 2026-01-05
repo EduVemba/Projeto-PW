@@ -1,9 +1,10 @@
-import { orchidsCollection } from "../state/orchidsInstance.js";
 import { data } from "../data/data.js";
 import { createFooter } from "./footer.js";
 import { clearMainContent } from "../utils/windowUtils.js";
 import { CreateOrchidFetch } from "../handlers/create.js";
 import { EditOrchidFetch } from "../handlers/edit.js";
+import { GetOrchidByIdFetch } from "../handlers/get.js";
+import { Orchid } from "../classes/orchid.js";
 
 function validateAndCreateOrchid(formData) {
     const genusId = Number(formData.get("genus"));
@@ -101,7 +102,7 @@ export function createOrchidForm(){
     return formContainer;
 }
 
-const editOrchidForm = (orchid, orchidsCollection) => {
+const editOrchidForm = (orchid) => {
     if (!orchid) throw new Error("Orquídea não encontrada.");
 
     const formContainer = document.createElement('div');
@@ -174,14 +175,19 @@ const editOrchidForm = (orchid, orchidsCollection) => {
 };
 
 
-export const openEditOrchidForm = (id, orchidsCollection) => {
-    const orchid = orchidsCollection.findById(id);
+// Ao inves de procurar no collection procura na BD
+export const openEditOrchidForm = async (id) => {
+    try {
+        const orchid = await GetOrchidByIdFetch(id);
 
-    const main = document.querySelector(".main-content");
+        const main = document.querySelector(".main-content");
 
-    clearMainContent();
+        clearMainContent();
 
-    main.appendChild(editOrchidForm(orchid, orchidsCollection));
+        main.appendChild(editOrchidForm(orchid));
+    } catch (error) {
+        alert(`Erro ao carregar os dados da orquídea para edição: ${error.message}`);
+    }
 }
 
 

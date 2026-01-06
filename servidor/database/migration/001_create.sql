@@ -74,3 +74,10 @@ ALTER TABLE orchid
 ADD CONSTRAINT fk_orchid_size
 FOREIGN KEY (size) REFERENCES attribute(id);
 
+CREATE INDEX idx_orchid_genus ON orchid(genus);
+CREATE INDEX idx_orchid_type ON orchid(type);
+
+CREATE INDEX idx_orchid_luminosity ON orchid(luminosity);
+CREATE INDEX idx_orchid_temperature ON orchid(temperature);
+CREATE INDEX idx_orchid_humidity ON orchid(humidity);
+CREATE INDEX idx_orchid_size ON orchid(size);

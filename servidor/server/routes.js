@@ -2,6 +2,7 @@
 
 const express = require('express');
 const OrchidHandler = require('../controller/orchidsHandler.js');
+const path = require('path');
 
 const router = express.Router();
 const orchidHandler = new OrchidHandler();
@@ -56,6 +57,16 @@ router.get('/options', (req, res) => {
   };
   res.json(options);
 });
+
+
+router.get('/image/:id', (req, res) => {
+    const imageID = req.params.id;
+
+    const dir = path.join(__dirname, '..', 'images', `${imageID}.jpg`);
+});
+
+ 
+router.get('/thumbnail/:id', (req, res) => {});
 
 
 module.exports = router

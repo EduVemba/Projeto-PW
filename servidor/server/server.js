@@ -4,23 +4,25 @@
 
 const express = require('express');
 const app = express();
+const path = require('path');
 const router = require('./routes.js');
 const port = 3000;
 
 app.use(express.json());
 
-// simple CORS for local dev
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  if (req.method === 'OPTIONS') return res.sendStatus(204);
-  next();
-});
+app.use(express.static(path.join(__dirname, '..', '..', 'www')));
 
 app.use('/orquideas', router);
 
+//app.get('/image/:id', require('./imageRoute'));
+
+app.use((req, res, next) => {
+  if (path.extname(req.path)) return next();
+  res.sendFile(path.join(__dirname, '..', '..','www', 'index.html'));
+});
+
+
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`App on url http://localhost:${port}/orquideas`)
 })

@@ -14,7 +14,6 @@ app.use(express.static(path.join(__dirname, '..', '..', 'www')));
 
 app.use('/orquideas', router);
 
-//app.get('/image/:id', require('./imageRoute'));
 
 app.use((req, res, next) => {
   if (path.extname(req.path)) return next();

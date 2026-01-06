@@ -6,11 +6,11 @@
  * @param {Number} id - Orchid ID
  * @returns {HTMLImageElement} Image element
  */
-function GetImage(genus, id) {
-    const type = genusType[genus];
+function GetImage(genusId, id) {
+    const type = genusType[genusId];
     const img = document.createElement('img');
     img.src = `./images/orchids/${type}/${id}.jpg`;
-    img.alt = `Orchid ${genus}`;
+    img.alt = `Orchid ${genusType[genusId]} #${id}`;
     img.onerror = () => {
         img.src = './images/logo/default.png'; 
     };
@@ -32,7 +32,7 @@ const genusType = {
  * @param {Number} size - Thumbnail size in pixels (default 50)
  * @returns {HTMLImageElement} Thumbnail image element
  */
-function GetThumbnail(genus, id, size = 50) {
+function GetThumbnail(genus, id, size = 30) {
     const img = GetImage(genus, id);
     img.style.width = `${size}px`;
     img.style.height = `${size}px`;

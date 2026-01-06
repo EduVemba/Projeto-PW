@@ -225,6 +225,19 @@ body {
     transition: all 0.4s ease;
 }
 
+.orchid-elem {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.orchid-thumb {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
 .ul-hr {
      border: none;
      border-top: 2px solid #b0ecb2;

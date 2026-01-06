@@ -59,14 +59,4 @@ router.get('/options', (req, res) => {
 });
 
 
-router.get('/image/:id', (req, res) => {
-    const imageID = req.params.id;
-
-    const dir = path.join(__dirname, '..', 'images', `${imageID}.jpg`);
-});
-
- 
-router.get('/thumbnail/:id', (req, res) => {});
-
-
 module.exports = router

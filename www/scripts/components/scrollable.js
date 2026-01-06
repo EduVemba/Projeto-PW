@@ -4,6 +4,7 @@ import { createOrchidForm }     from "./formOrchids.js"
 import { orchidPage } from "./orchid.js";
 import { clearMainContent } from "../utils/windowUtils.js";
 import { openModal } from "./modal.js";
+import { GetThumbnail } from "../utils/image.js";
 
 import { GetAllFetch, GetFilteredFetch } from "../handlers/filter.js";
 
@@ -40,9 +41,24 @@ export const scrollabeDiv = async (header,category = "", type = 0) => {
             li.classList.add('orchid');
 
             const textSpan = document.createElement('span');
-            textSpan.textContent = `❀ ${orchid.getDescription()}`;
 
             textSpan.className = 'orchid-elem';
+
+            const flowerIcon = document.createElement('span');
+            flowerIcon.textContent = '❀';
+
+            const thumb = GetThumbnail(
+            orchid.getGenus(),
+            orchid.getId(),
+            );
+            thumb.classList.add('orchid-thumb');
+
+            const description = document.createElement('span');
+            description.textContent = orchid.getDescription();
+
+            textSpan.appendChild(flowerIcon);
+            textSpan.appendChild(thumb);
+            textSpan.appendChild(description);
 
             textSpan.addEventListener("click", () => {
                 clearMainContent();

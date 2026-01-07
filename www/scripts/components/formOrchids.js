@@ -75,6 +75,10 @@ export async function createOrchidForm(){
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
 
+        if (button.disabled) return;
+        button.disabled = true;
+        button.textContent = "A gravar...";
+
         try {
             const formData = new FormData(form);
             const orchidData = await validateAndCreateOrchid(formData);
@@ -90,6 +94,9 @@ export async function createOrchidForm(){
 
         } catch (error) {
             alert("Erro: " + error.message);
+
+            button.disabled = false;
+            button.textContent = "Gravar";
         }
     });
 

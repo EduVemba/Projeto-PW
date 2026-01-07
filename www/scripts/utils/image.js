@@ -1,5 +1,19 @@
 "use strict";
 
+
+
+const genusType = {
+    1: 'bulbophyllum',
+    2: 'cattleya',
+    3: 'cymbidium',
+    4: 'paphiopedilum',
+    5: 'phalaenopsis'
+}
+
+function InputImage(src) {
+    
+}
+
 /**
  * Get image element for an orchid
  * @param {String} genus - Genus name in lowercase (e.g., 'bulbophyllum')
@@ -15,14 +29,6 @@ function GetImage(genusId, id) {
         img.src = './images/logo/default.png'; 
     };
     return img;
-}
-
-const genusType = {
-    1: 'bulbophyllum',
-    2: 'cattleya',
-    3: 'cymbidium',
-    4: 'paphiopedilum',
-    5: 'phalaenopsis'
 }
 
 /**
@@ -41,4 +47,4 @@ function GetThumbnail(genus, id, size = 30) {
     return img;
 }
 
-export { GetImage, GetThumbnail };
+export { GetImage, GetThumbnail, InputImage };

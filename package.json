@@ -13,7 +13,16 @@
     "url": "git+https://github.com/EduVemba/Projeto-PW.git"
   },
   "keywords": [],
-  "author": "",
+  "authors": [
+    {
+      "name": "Eduardo Vemba",
+      "number": "202300364"
+    },
+    {
+      "name": "João Freitas",
+      "number":"2024151451"
+    }
+  ],
   "license": "ISC",
   "type": "commonjs",
   "bugs": {

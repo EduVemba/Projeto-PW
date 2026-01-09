@@ -75,5 +75,7 @@ DELIMITER $$
         _size
     );
     
+    SELECT LAST_INSERT_ID() AS insertedID;
+    
     END $$ 
 DELIMITER ;

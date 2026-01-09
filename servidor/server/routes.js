@@ -4,6 +4,8 @@ const express = require('express');
 const OrchidHandler = require('../controller/orchidsHandler.js');
 const path = require('path');
 
+const upload = require('../utils/multerConfig.js');
+
 const router = express.Router();
 const orchidHandler = new OrchidHandler();
 
@@ -17,16 +19,16 @@ router.get('/filtrar', (req,res) => orchidHandler.handleFilter(req, res));
 
 router.get('/filtered', (req,res) => orchidHandler.handleFilter(req, res));
 
-router.post('/create', (req, res) => orchidHandler.handleCreate(req, res));
+router.post('/create', upload.single('image'),(req, res) => orchidHandler.handleCreate(req, res));
 
-router.put('/update/:id', (req, res) => orchidHandler.handleUpdate(req, res));
+router.put('/update/:id', upload.single('image'), (req, res) => orchidHandler.handleUpdate(req, res));
 
 router.delete('/delete/:id', (req, res) => orchidHandler.handleDelete(req, res));
 
 router.get('/options', (req, res) => {
     const options = {
     "genus": [
-        { "id": 1, "description": "Bullbophyllum" },
+        { "id": 1, "description": "Bulbophyllum" },
         { "id": 2, "description": "Cattleya" },
         { "id": 3, "description": "Cymbidium" },
         { "id": 4, "description": "Paphiopedilum" },

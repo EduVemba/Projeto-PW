@@ -27,14 +27,12 @@ async function validateAndCreateOrchid(formData) {
         luminosity: toNum("luminosity"),
         temperature: toNum("temperature"),
         humidity: toNum("humidity"),
-        size: toNum("size"),
-        image_src: (formData.get("image_src") || "").toString().trim()
+        size: toNum("size")
     };
 
     return novaOrquidea;
 }
 
-//TODO: utilizar o metodo para input de imagem.
 export async function createOrchidForm(){
     const formContainer     = document.createElement('div');
     formContainer.className = "form-container";
@@ -57,7 +55,7 @@ export async function createOrchidForm(){
     form.appendChild(createSelect("Humidade:", "humidity", options.humidity, null));
     form.appendChild(createSelect("Tamanho:", "size", options.size, null));
 
-    form.appendChild(createInput("Imagem (src):", "image_src", "","file"));
+    form.appendChild(createInput("Imagem:", "image_src", "", "file"));
 
     const button = document.createElement("button");
     button.textContent = "Gravar";
@@ -71,7 +69,6 @@ export async function createOrchidForm(){
         history.back();
     });
 
-
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
 
@@ -83,18 +80,17 @@ export async function createOrchidForm(){
             const formData = new FormData(form);
             const orchidData = await validateAndCreateOrchid(formData);
             
-            // Call the server to create the orchid
-            CreateOrchidFetch(orchidData).then(result => {
-                console.log("Orquídea criada com sucesso:", result);
-                form.reset();
-                history.back();
-            }).catch(error => {
-                alert("Erro ao criar orquídea: " + error.message);
-            });
+            // Obter o ficheiro de imagem
+            const imageFile = formData.get("image_src");
+            
+            // Enviar para o servidor
+            const result = await CreateOrchidFetch(orchidData, imageFile);
+            console.log("Orquídea criada com sucesso:", result);
+            form.reset();
+            history.back();
 
         } catch (error) {
             alert("Erro: " + error.message);
-
             button.disabled = false;
             button.textContent = "Gravar";
         }
@@ -111,7 +107,6 @@ export async function createOrchidForm(){
 }
 
 const editOrchidForm = async (id) => {
-
     const formContainer = document.createElement('div');
     formContainer.className = "form-container";
 
@@ -123,10 +118,8 @@ const editOrchidForm = async (id) => {
     form.appendChild(title);
 
     const orchid = await GetOrchidByIdFetch(id);
-
     const options = await GetOptionsFromAPI();
 
-    // Preenche com dados existentes
     const descriptionParts = orchid.getDescription().split(' ').slice(1).join(' ');
     
     form.appendChild(createInput("Nome:", "description", descriptionParts));
@@ -136,7 +129,7 @@ const editOrchidForm = async (id) => {
     form.appendChild(createSelect("Temperatura:", "temperature", options.temperature, orchid.getTemperature()));
     form.appendChild(createSelect("Humidade:", "humidity", options.humidity, orchid.getHumidity()));
     form.appendChild(createSelect("Tamanho:", "size", options.size, orchid.getSize()));
-    form.appendChild(createInput("Imagem (src):", "image_src", "", "file"));
+    form.appendChild(createInput("Imagem:", "image_src", "", "file"));
 
     const button = document.createElement("button");
     button.textContent = "Gravar";
@@ -148,11 +141,16 @@ const editOrchidForm = async (id) => {
 
     cancelButton.addEventListener("click", () => history.back());
 
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
         event.preventDefault();
+
+        if (button.disabled) return;
+        button.disabled = true;
+        button.textContent = "A gravar...";
 
         try {
             const formData = new FormData(form);
+            const imageFile = formData.get("image_src");
 
             const updatedData = {
                 description: `${options.genus.find(g => g.id === Number(formData.get("genus")))?.description} ${(formData.get("description") || "").toString().trim()}`,
@@ -161,18 +159,17 @@ const editOrchidForm = async (id) => {
                 luminosity: Number(formData.get("luminosity")),
                 temperature: Number(formData.get("temperature")),
                 humidity: Number(formData.get("humidity")),
-                size: Number(formData.get("size")),
-                image_src: (formData.get("image_src") || "").toString().trim()
+                size: Number(formData.get("size"))
             };
 
-            EditOrchidFetch(orchid.getId(), updatedData).then(result => {
-                form.reset();
-                history.back();
-            }).catch(error => {
-                alert("Erro ao editar orquídea: " + error.message);
-            });
+            await EditOrchidFetch(orchid.getId(), updatedData, imageFile);
+            form.reset();
+            history.back();
+            
         } catch (error) {
             alert("Erro: " + error.message);
+            button.disabled = false;
+            button.textContent = "Gravar";
         }
     });
 
@@ -186,66 +183,64 @@ const editOrchidForm = async (id) => {
     return formContainer;
 };
 
-
-// Ao inves de procurar no collection procura na BD
 export const openEditOrchidForm = async (id) => {
     try {
         const main = document.querySelector(".main-content");
-
         clearMainContent();
-
         const editForm = await editOrchidForm(id);
-
         main.appendChild(editForm);
     } catch (error) {
         alert(`Erro ao carregar os dados da orquídea para edição: ${error.message}`);
     }
 }
 
-
 const createInput = (labelText, name, value = "", type = "") => {
-        const div = document.createElement("div");
+    const div = document.createElement("div");
 
-        const label         = document.createElement("label");
-        label.textContent   = labelText;
-        label.htmlFor       = name;
+    const label = document.createElement("label");
+    label.textContent = labelText;
+    label.htmlFor = name;
 
-        const tp = type || "text";
+    const tp = type || "text";
 
-        const input         = document.createElement("input");
-        input.type          = tp;
-        input.name          = name;
-        input.id            = name;
-        input.value         = value;
+    const input = document.createElement("input");
+    input.type = tp;
+    input.name = name;
+    input.id = name;
+    
+    if (type === "file") {
+        input.accept = "image/*"; // Aceitar apenas imagens
+    } else {
+        input.value = value;
+    }
 
-        div.appendChild(label);
-        div.appendChild(input);
-        return div;
+    div.appendChild(label);
+    div.appendChild(input);
+    return div;
 };
 
-
 const createSelect = (labelText, name, options, selectedValue = null) => {
-        const div = document.createElement("div");
+    const div = document.createElement("div");
 
-        const label = document.createElement("label");
-        label.textContent = labelText;
-        label.htmlFor = name;
+    const label = document.createElement("label");
+    label.textContent = labelText;
+    label.htmlFor = name;
 
-        const select = document.createElement("select");
-        select.name = name;
-        select.id = name;
+    const select = document.createElement("select");
+    select.name = name;
+    select.id = name;
 
-        options.forEach(opt => {
-            const option = document.createElement("option");
-            option.value = opt.id;
-            option.textContent = opt.description;
+    options.forEach(opt => {
+        const option = document.createElement("option");
+        option.value = opt.id;
+        option.textContent = opt.description;
 
-            if (opt.id === selectedValue) option.selected = true;
+        if (opt.id === selectedValue) option.selected = true;
 
-            select.appendChild(option);
-        });
+        select.appendChild(option);
+    });
 
-        div.appendChild(label);
-        div.appendChild(select);
-        return div;
+    div.appendChild(label);
+    div.appendChild(select);
+    return div;
 };

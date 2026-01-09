@@ -49,11 +49,10 @@ class DatabaseServices {
             ]
         );
 
-    /*
+    
     return {
-        success: result.affectedRows === 1,
-        insertedID: result.insertId || null
-    }*/
+        insertedID: result[0][0].insertedID
+    };
     }
 
     async EditOrchid(id,orchid) {

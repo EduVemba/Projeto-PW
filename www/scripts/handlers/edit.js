@@ -1,14 +1,19 @@
 "use strict";
 
-async function EditOrchidFetch(id, orchid) {
-    console.log("Editando orquídea:", id, orchid);
+async function EditOrchidFetch(id, orchidData, imageFile) {
+    console.log("Editando orquídea:", id, orchidData);
 
-    const res = await fetch(`http://localhost:3000/orquideas/update/${id}`, {
+    const formData = new FormData();
+    
+    formData.append('data', JSON.stringify(orchidData));
+    
+    if (imageFile && imageFile.size > 0) {
+        formData.append('image', imageFile);
+    }
+
+    const res = await fetch(`http://localhost:3000/orquideas/edit/${id}`, {
         method: 'PUT',
-        headers: { 
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(orchid)
+        body: formData
     }).catch(err => {
         console.error("Fetch error:", err);
         throw new Error("Erro de conexão: " + err.message);

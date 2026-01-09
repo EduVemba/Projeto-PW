@@ -134,6 +134,21 @@ class OrchidServices {
         return result;
     }
 
+    async fetchOrchidByName(name) {
+
+        if (!name || typeof name !== 'string') {
+            throw new Error('Nome inválido');
+        }
+
+        const result = await this.dbService.GetByName(name);
+        
+        if (!result) {
+            throw new Error('Orquídea não encontrada');
+        }
+
+        return result;
+    }
+
     /**
      * 
      * @param {Number || String} type 

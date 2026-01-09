@@ -135,7 +135,11 @@ class DatabaseServices {
             'SELECT * FROM orchid WHERE description = ?', [name]
         );
 
-        return result;
+         if (!result || result.length === 0) {
+            return null;
+        }
+
+        return result[0];
     }
 
     async GetById(id){

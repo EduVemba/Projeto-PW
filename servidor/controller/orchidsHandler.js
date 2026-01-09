@@ -49,6 +49,25 @@ class OrchidHandler {
         }
     }
 
+    async handleGetByName(req,res) {
+
+        try{
+            const name = req.params.name;
+            const orchid = await this.orchServices.fetchOrchidByName(name);
+            return res.status(200).json({
+                succes: true,
+                data: orchid
+            });
+
+        }catch(error){
+            const statusCode = error.message.includes('não encontrada') ? 404 : 400;
+            return res.status(statusCode).json({
+                success: false,
+                message: error.message
+            });
+        }
+    }
+
     async handleCreate(req,res) {
         try{
             const orchidData = req.body;

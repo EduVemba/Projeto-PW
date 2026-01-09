@@ -7,9 +7,7 @@ async function CreateOrchidFetch(orchid) {
 
     const res = await fetch('http://localhost:3000/orquideas/create', {
         method: 'POST',
-        headers: { 
-            'Content-Type': 'application/json'
-        },
+       
         body: JSON.stringify(orchid)
     }).catch(err => {
         console.error("Fetch error:", err);

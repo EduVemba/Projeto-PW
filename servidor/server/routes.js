@@ -11,6 +11,8 @@ router.get('/todas', (req,res) => orchidHandler.handleGetAll(req, res));
 
 router.get('/orquidea/:id', (req, res) => orchidHandler.handleGetByID(req, res));
 
+router.get('/orquidea/:nome', (req, res) => orchidHandler.handleGetByName(req, res));
+
 router.get('/filtrar', (req,res) => orchidHandler.handleFilter(req, res));
 
 router.get('/filtered', (req,res) => orchidHandler.handleFilter(req, res));
@@ -24,35 +26,39 @@ router.delete('/delete/:id', (req, res) => orchidHandler.handleDelete(req, res))
 router.get('/options', (req, res) => {
     const options = {
     "genus": [
-        { "id": 1, "description": "Phalaenopsis" },
+        { "id": 1, "description": "Bullbophyllum" },
         { "id": 2, "description": "Cattleya" },
-        { "id": 3, "description": "Dendrobium" }
+        { "id": 3, "description": "Cymbidium" },
+        { "id": 4, "description": "Paphiopedilum" },
+        { "id": 5, "description": "Phalaenopsis" },
     ],
     "type": [
-        { "id": 1, "description": "Epífita" },
-        { "id": 2, "description": "Terrestre" },
-        { "id": 3, "description": "Litófita" }
+        { "id": 1, "description": "Espécie" },
+        { "id": 2, "description": "Híbrido" }
     ],
     "luminosity": [
-        { "id": 1, "description": "Baixa" },
-        { "id": 2, "description": "Média" },
-        { "id": 3, "description": "Alta" }
+        { "id": 1, "description": "Sombra total" },
+        { "id": 2, "description": "Luz sombreada" },
+        { "id": 3, "description": "Luz filtrada" },
+        { "id": 4, "description": "Luz forte" }
     ],
     "temperature": [
-        { "id": 1, "description": "Fria (10-15°C)" },
-        { "id": 2, "description": "Intermediária (15-25°C)" },
-        { "id": 3, "description": "Quente (25-35°C)" }
+        { "id": 1, "description": "Frio" },
+        { "id": 2, "description": "Temperado" },
+        { "id": 3, "description": "Quente" },
+        { "id": 4, "description": "Muito quente" }
     ],
     "humidity": [
-        { "id": 1, "description": "Baixa (40-50%)" },
-        { "id": 2, "description": "Média (50-70%)" },
-        { "id": 3, "description": "Alta (70-90%)" }
+        { "id": 1, "description": "\u226440%" },
+        { "id": 2, "description": "40% a 60%" },
+        { "id": 3, "description": "60% a 80%" },
+        { "id": 4, "description": "\u226580%" }
     ],
     "size": [
-        { "id": 1, "description": "Miniatura (<15cm)" },
-        { "id": 2, "description": "Pequena (15-30cm)" },
-        { "id": 3, "description": "Média (30-60cm)" },
-        { "id": 4, "description": "Grande (>60cm)" }
+        { "id": 1, "description": "Miniatura" },
+        { "id": 2, "description": "Pequeno" },
+        { "id": 3, "description": "Médio" },
+        { "id": 4, "description": "Grande" }
     ]
   };
   res.json(options);
